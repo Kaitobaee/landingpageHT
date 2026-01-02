@@ -1524,6 +1524,158 @@
             sendMessage();
         });
     });
+
+    // ========== SCROLL REVEAL ANIMATIONS ==========
+    function initScrollReveal() {
+        // Add reveal classes to elements
+        const sections = document.querySelectorAll('.section');
+        const sectionHeaders = document.querySelectorAll('.section-header');
+        const featureBoxes = document.querySelectorAll('.feature-box');
+        const showcaseImages = document.querySelectorAll('.showcase-image');
+        const showcaseContents = document.querySelectorAll('.showcase-content');
+        const statBoxes = document.querySelectorAll('.stat-box');
+        const pricingCards = document.querySelectorAll('.pricing-card');
+        const statsSection = document.querySelectorAll('.stats-section');
+
+        // Add reveal class to section headers
+        sectionHeaders.forEach(header => {
+            header.classList.add('reveal-up');
+        });
+
+        // Add reveal with stagger to feature boxes
+        featureBoxes.forEach((box, index) => {
+            box.classList.add('reveal-scale');
+            box.classList.add(`reveal-delay-${(index % 6) + 1}`);
+        });
+
+        // Alternate reveal direction for showcase sections
+        showcaseImages.forEach((img, index) => {
+            img.classList.add(index % 2 === 0 ? 'reveal-left' : 'reveal-right');
+            img.querySelector('img')?.classList.add('float-animate');
+        });
+
+        showcaseContents.forEach((content, index) => {
+            content.classList.add(index % 2 === 0 ? 'reveal-right' : 'reveal-left');
+        });
+
+        // Stats boxes with stagger
+        statBoxes.forEach((box, index) => {
+            box.classList.add('reveal-up');
+            box.classList.add(`reveal-delay-${index + 1}`);
+        });
+
+        // Stats section glow
+        statsSection.forEach(section => {
+            section.classList.add('reveal-scale');
+        });
+
+        // Pricing cards with stagger
+        pricingCards.forEach((card, index) => {
+            card.classList.add('reveal-up');
+            card.classList.add(`reveal-delay-${index + 1}`);
+        });
+
+        // Logo marquee
+        const logoMarquee = document.querySelector('.logo-marquee');
+        if (logoMarquee) {
+            logoMarquee.classList.add('reveal-blur');
+        }
+
+        // Main card (hero)
+        const mainCard = document.querySelector('.main-card');
+        if (mainCard) {
+            mainCard.classList.add('reveal-scale');
+            mainCard.classList.add('active'); // Show immediately
+        }
+    }
+
+    // Intersection Observer for scroll reveal
+    function setupScrollObserver() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -100px 0px',
+            threshold: 0.1
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Counter animation for stat numbers
+                    if (entry.target.classList.contains('stat-box')) {
+                        animateCounter(entry.target);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all reveal elements
+        const revealElements = document.querySelectorAll(
+            '.reveal, .reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate, .reveal-blur'
+        );
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+    }
+
+    // Counter animation for stats
+    function animateCounter(element) {
+        const numberEl = element.querySelector('.number');
+        if (!numberEl || numberEl.dataset.animated) return;
+        
+        numberEl.dataset.animated = 'true';
+        const text = numberEl.textContent;
+        const number = parseInt(text.replace(/[^0-9]/g, ''));
+        const suffix = text.replace(/[0-9]/g, '');
+        
+        if (isNaN(number)) return;
+        
+        let current = 0;
+        const increment = number / 50;
+        const duration = 1500;
+        const stepTime = duration / 50;
+        
+        const counter = setInterval(() => {
+            current += increment;
+            if (current >= number) {
+                current = number;
+                clearInterval(counter);
+            }
+            numberEl.textContent = Math.floor(current) + suffix;
+        }, stepTime);
+    }
+
+    // Parallax effect on scroll
+    function setupParallax() {
+        const parallaxElements = document.querySelectorAll('.showcase-image img');
+        
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            
+            parallaxElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const inView = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (inView) {
+                    const speed = 0.05;
+                    const yPos = (rect.top - window.innerHeight / 2) * speed;
+                    el.style.transform = `translateY(${yPos}px)`;
+                }
+            });
+        });
+    }
+
+    // Initialize all scroll animations
+    initScrollReveal();
+    setupScrollObserver();
+    setupParallax();
+
+    // Add glow animation to CTA buttons
+    document.querySelectorAll('.cta-btn:not(.cta-btn-outline)').forEach(btn => {
+        btn.classList.add('glow-animate');
+    });
 </script>
 </body>
 </html>
