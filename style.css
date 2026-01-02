@@ -84,13 +84,19 @@
 
         .header-nav a:hover {
             color: white;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
         }
 
         .header-nav a.active {
-            background: linear-gradient(135deg, white, #f0f0f0);
-            color: #333;
-            font-weight: 700;
+            background: #ffffff;
+            color: #1a1a1a;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-nav a.active:hover {
+            background: #ffffff;
+            color: #1a1a1a;
         }
 
         .header-actions {
@@ -1645,10 +1651,15 @@
             transition: all 0.3s ease;
         }
 
-        .mobile-nav a:hover,
-        .mobile-nav a.active {
+        .mobile-nav a:hover {
             color: white;
             background: rgba(255,255,255,0.08);
+        }
+
+        .mobile-nav a.active {
+            background: #ffffff;
+            color: #1a1a1a;
+            font-weight: 600;
         }
 
         .mobile-cta {

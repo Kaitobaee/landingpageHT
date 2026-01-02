@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -708,10 +708,18 @@
     // ========== STICKY HEADER SCROLL EFFECT ==========
     const stickyHeader = document.getElementById('stickyHeader');
     const navLinks = document.querySelectorAll('.header-nav a');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
     const sections = document.querySelectorAll('#home, #features, #pricing, #contact');
+    // Tăng giá trị này nếu bạn muốn "xuống thêm" cho vừa khung.
+    const SCROLL_EXTRA_GAP = 90;
 
     function setActiveNavById(id) {
+        // Update desktop nav
         navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+        // Update mobile nav
+        mobileNavLinks.forEach(link => {
             link.classList.toggle('active', link.getAttribute('href') === '#' + id);
         });
     }
@@ -745,9 +753,6 @@
     });
 
     // Smooth scroll for ALL header anchors (logo, nav, button)
-    // Tăng giá trị này nếu bạn muốn “xuống thêm” cho vừa khung.
-    const SCROLL_EXTRA_GAP = 90;
-
     document.querySelectorAll('.sticky-header a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
@@ -1308,7 +1313,7 @@
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileCloseBtn = document.getElementById('mobileCloseBtn');
     const mobileMenu = document.getElementById('mobileMenu');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+    // mobileNavLinks đã được khai báo ở trên
 
     function openMobileMenu() {
         mobileMenu.classList.add('active');
