@@ -45,8 +45,11 @@
         </div>
     </header>
 
-    <!-- Sao băng background -->
+    <!-- Sao băng background (chỉ hiện ở Home) -->
     <div class="shooting-stars" id="shootingStars"></div>
+
+    <!-- Tuyết rơi background (hiện ở các section khác) -->
+    <div class="snow-container" id="snowContainer"></div>
 
     <div class="main-card" id="home">
         <div class="left-side">
@@ -475,37 +478,9 @@
                     </div>
                 </div>
                 <div class="chatbot-header-actions">
-                    <button class="chatbot-settings-btn" id="chatbotSettingsBtn" title="Train AI">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </button>
                     <button class="chatbot-close-btn" id="chatbotClose">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
-                </div>
-            </div>
-
-            <!-- Training Panel (Hidden by default) -->
-            <div class="chatbot-training" id="chatbotTraining">
-                <div class="training-header">
-                    <h5><i class="fa-solid fa-brain"></i> Dạy AI trả lời</h5>
-                    <button class="training-close" id="trainingClose"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <div class="training-form">
-                    <div class="training-field">
-                        <label>Từ khóa câu hỏi (cách nhau bằng dấu phẩy)</label>
-                        <input type="text" id="trainKeywords" placeholder="vd: giá, bao nhiêu, chi phí">
-                    </div>
-                    <div class="training-field">
-                        <label>Câu trả lời</label>
-                        <textarea id="trainAnswer" placeholder="vd: Gói Starter miễn phí, gói Pro $19/tháng, gói Enterprise liên hệ"></textarea>
-                    </div>
-                    <button class="training-submit" id="trainSubmit">
-                        <i class="fa-solid fa-plus"></i> Thêm kiến thức
-                    </button>
-                </div>
-                <div class="training-list" id="trainingList">
-                    <h6>Kiến thức đã dạy:</h6>
-                    <div class="knowledge-items" id="knowledgeItems"></div>
                 </div>
             </div>
 
@@ -534,6 +509,10 @@
 
 <script>
     // Tạo sao băng - MÀU TÍM HUYỀN ẢO + TO + NHIỀU
+    const shootingStarsContainer = document.getElementById('shootingStars');
+    const snowContainer = document.getElementById('snowContainer');
+    const homeSection = document.getElementById('home');
+    
     function createShootingStar() {
         const star = document.createElement('div');
         star.className = 'star';
@@ -577,7 +556,68 @@
         }, duration * 1000 + 1000);
     }
 
-    // Tạo rất nhiều sao băng tím
+    // ========== TẠO TUYẾT RƠI ==========
+    function createSnowflake() {
+        const snow = document.createElement('div');
+        snow.className = 'snowflake';
+        
+        // Vị trí ngẫu nhiên theo chiều ngang
+        const x = Math.random() * window.innerWidth;
+        
+        // Kích thước ngẫu nhiên
+        const size = 2 + Math.random() * 4;
+        
+        // Tốc độ rơi
+        const duration = 8 + Math.random() * 12;
+        
+        // Độ mờ
+        const opacity = 0.3 + Math.random() * 0.5;
+        
+        // Dao động ngang
+        const drift = -50 + Math.random() * 100;
+
+        snow.style.left = x + 'px';
+        snow.style.top = '-10px';
+        snow.style.width = size + 'px';
+        snow.style.height = size + 'px';
+        snow.style.opacity = opacity;
+        snow.style.setProperty('--duration', duration + 's');
+        snow.style.setProperty('--drift', drift + 'px');
+        
+        snowContainer.appendChild(snow);
+        
+        setTimeout(() => {
+            if (snow.parentElement) snow.remove();
+        }, duration * 1000);
+    }
+
+    // Tạo tuyết liên tục
+    setInterval(createSnowflake, 100);
+
+    // Tạo tuyết ban đầu
+    for (let i = 0; i < 50; i++) {
+        setTimeout(createSnowflake, i * 50);
+    }
+
+    // ========== ĐIỀU KHIỂN HIỂN THỊ SAO BĂNG VÀ TUYẾT ==========
+    function updateEffectsVisibility() {
+        const homeRect = homeSection.getBoundingClientRect();
+        const isHomeVisible = homeRect.bottom > 0 && homeRect.top < window.innerHeight;
+        
+        if (isHomeVisible) {
+            shootingStarsContainer.style.opacity = '1';
+            snowContainer.style.opacity = '0';
+        } else {
+            shootingStarsContainer.style.opacity = '0';
+            snowContainer.style.opacity = '1';
+        }
+    }
+
+    // Kiểm tra khi scroll
+    window.addEventListener('scroll', updateEffectsVisibility);
+    updateEffectsVisibility(); // Chạy lần đầu
+
+    // Tạo sao băng tím
     setInterval(createShootingStar, 200);
 
     // Đợt lớn khi load trang
@@ -587,7 +627,7 @@
 
     // Burst ngẫu nhiên để luôn có mưa sao băng tím
     setInterval(() => {
-        const burst = 4 + Math.floor(Math.random() * 6); // 4-9 sao cùng lúc
+        const burst = 4 + Math.floor(Math.random() * 6);
         for (let i = 0; i < burst; i++) {
             setTimeout(createShootingStar, i * 120);
         }
@@ -1328,15 +1368,6 @@
     const chatBadge = document.getElementById('chatBadge');
     const chatbotSuggestions = document.getElementById('chatbotSuggestions');
     const suggestionBtns = document.querySelectorAll('.suggestion-btn');
-    
-    // Training elements
-    const chatbotSettingsBtn = document.getElementById('chatbotSettingsBtn');
-    const chatbotTraining = document.getElementById('chatbotTraining');
-    const trainingClose = document.getElementById('trainingClose');
-    const trainKeywords = document.getElementById('trainKeywords');
-    const trainAnswer = document.getElementById('trainAnswer');
-    const trainSubmit = document.getElementById('trainSubmit');
-    const knowledgeItems = document.getElementById('knowledgeItems');
 
     // Default knowledge base
     let knowledgeBase = [
@@ -1366,49 +1397,13 @@
         },
         {
             keywords: ['ai', 'trợ lý', 'chatbot', 'bot'],
-            answer: '🤖 Tôi là MetaMuse AI - trợ lý ảo thông minh! Tôi có thể giúp bạn:\n\n• Trả lời câu hỏi về sản phẩm\n• Hướng dẫn sử dụng tính năng\n• Giải đáp thắc mắc 24/7\n\nBạn cũng có thể dạy tôi thêm kiến thức mới bằng cách nhấn nút 🎓!'
+            answer: '🤖 Tôi là MetaMuse AI - trợ lý ảo thông minh! Tôi có thể giúp bạn:\n\n• Trả lời câu hỏi về sản phẩm\n• Hướng dẫn sử dụng tính năng\n• Giải đáp thắc mắc 24/7\n\nHãy hỏi tôi bất cứ điều gì bạn muốn biết!'
         },
         {
             keywords: ['đăng ký', 'register', 'tạo tài khoản', 'sign up'],
             answer: '📝 Để đăng ký tài khoản:\n\n1. Nhấn nút "Get Started" trên website\n2. Điền thông tin email và mật khẩu\n3. Xác nhận email\n4. Bắt đầu học ngay!\n\nGói Starter hoàn toàn miễn phí!'
         }
     ];
-
-    // Load saved knowledge from localStorage
-    const savedKnowledge = localStorage.getItem('chatbotKnowledge');
-    if (savedKnowledge) {
-        knowledgeBase = JSON.parse(savedKnowledge);
-    }
-
-    // Save knowledge to localStorage
-    function saveKnowledge() {
-        localStorage.setItem('chatbotKnowledge', JSON.stringify(knowledgeBase));
-    }
-
-    // Render knowledge items in training panel
-    function renderKnowledgeItems() {
-        knowledgeItems.innerHTML = '';
-        knowledgeBase.forEach((item, index) => {
-            const div = document.createElement('div');
-            div.className = 'knowledge-item';
-            div.innerHTML = `
-                <div class="keywords">${item.keywords.join(', ')}</div>
-                <div class="answer">${item.answer.substring(0, 100)}${item.answer.length > 100 ? '...' : ''}</div>
-                <button class="delete-btn" data-index="${index}"><i class="fa-solid fa-trash"></i></button>
-            `;
-            knowledgeItems.appendChild(div);
-        });
-
-        // Add delete handlers
-        document.querySelectorAll('.knowledge-item .delete-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const index = parseInt(this.dataset.index);
-                knowledgeBase.splice(index, 1);
-                saveKnowledge();
-                renderKnowledgeItems();
-            });
-        });
-    }
 
     // Toggle chatbot window
     chatbotToggle.addEventListener('click', () => {
@@ -1423,34 +1418,6 @@
     chatbotClose.addEventListener('click', () => {
         chatbotWindow.classList.remove('active');
         chatbotToggle.classList.remove('active');
-    });
-
-    // Training panel toggle
-    chatbotSettingsBtn.addEventListener('click', () => {
-        chatbotTraining.classList.add('active');
-        renderKnowledgeItems();
-    });
-
-    trainingClose.addEventListener('click', () => {
-        chatbotTraining.classList.remove('active');
-    });
-
-    // Add new knowledge
-    trainSubmit.addEventListener('click', () => {
-        const keywords = trainKeywords.value.trim().toLowerCase().split(',').map(k => k.trim()).filter(k => k);
-        const answer = trainAnswer.value.trim();
-
-        if (keywords.length > 0 && answer) {
-            knowledgeBase.push({ keywords, answer });
-            saveKnowledge();
-            renderKnowledgeItems();
-            trainKeywords.value = '';
-            trainAnswer.value = '';
-            
-            // Show success message
-            addBotMessage('✅ Đã thêm kiến thức mới! Tôi đã học được cách trả lời về: ' + keywords.join(', '));
-            chatbotTraining.classList.remove('active');
-        }
     });
 
     // Get current time
