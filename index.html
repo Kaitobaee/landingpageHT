@@ -454,6 +454,84 @@
         </div>
     </footer>
 
+    <!-- ========== AI CHATBOT WIDGET ========== -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <!-- Chat Toggle Button -->
+        <div class="chatbot-toggle" id="chatbotToggle">
+            <i class="fa-solid fa-comments"></i>
+            <span class="chat-badge" id="chatBadge">1</span>
+        </div>
+
+        <!-- Chat Window -->
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-header-info">
+                    <div class="chatbot-avatar">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h4>MetaMuse AI</h4>
+                        <span class="chatbot-status"><i class="fa-solid fa-circle"></i> Online</span>
+                    </div>
+                </div>
+                <div class="chatbot-header-actions">
+                    <button class="chatbot-settings-btn" id="chatbotSettingsBtn" title="Train AI">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </button>
+                    <button class="chatbot-close-btn" id="chatbotClose">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Training Panel (Hidden by default) -->
+            <div class="chatbot-training" id="chatbotTraining">
+                <div class="training-header">
+                    <h5><i class="fa-solid fa-brain"></i> Dạy AI trả lời</h5>
+                    <button class="training-close" id="trainingClose"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="training-form">
+                    <div class="training-field">
+                        <label>Từ khóa câu hỏi (cách nhau bằng dấu phẩy)</label>
+                        <input type="text" id="trainKeywords" placeholder="vd: giá, bao nhiêu, chi phí">
+                    </div>
+                    <div class="training-field">
+                        <label>Câu trả lời</label>
+                        <textarea id="trainAnswer" placeholder="vd: Gói Starter miễn phí, gói Pro $19/tháng, gói Enterprise liên hệ"></textarea>
+                    </div>
+                    <button class="training-submit" id="trainSubmit">
+                        <i class="fa-solid fa-plus"></i> Thêm kiến thức
+                    </button>
+                </div>
+                <div class="training-list" id="trainingList">
+                    <h6>Kiến thức đã dạy:</h6>
+                    <div class="knowledge-items" id="knowledgeItems"></div>
+                </div>
+            </div>
+
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chat-message bot">
+                    <div class="message-avatar"><i class="fa-solid fa-robot"></i></div>
+                    <div class="message-content">
+                        <p>Xin chào! 👋 Tôi là trợ lý AI của MetaMuse. Tôi có thể giúp gì cho bạn hôm nay?</p>
+                        <span class="message-time">Vừa xong</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chatbot-suggestions" id="chatbotSuggestions">
+                <button class="suggestion-btn">MetaMuse là gì?</button>
+                <button class="suggestion-btn">Giá cả như thế nào?</button>
+                <button class="suggestion-btn">Các tính năng chính?</button>
+            </div>
+
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" placeholder="Nhập tin nhắn...">
+                <button id="chatSendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
 <script>
     // Tạo sao băng - MÀU TÍM HUYỀN ẢO + TO + NHIỀU
     function createShootingStar() {
@@ -1238,6 +1316,245 @@
 
     document.querySelectorAll('section[id], .main-card[id]').forEach(section => {
         mobileNavObserver.observe(section);
+    });
+
+    // ========== AI CHATBOT ==========
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotClose = document.getElementById('chatbotClose');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatInput = document.getElementById('chatInput');
+    const chatSendBtn = document.getElementById('chatSendBtn');
+    const chatBadge = document.getElementById('chatBadge');
+    const chatbotSuggestions = document.getElementById('chatbotSuggestions');
+    const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+    
+    // Training elements
+    const chatbotSettingsBtn = document.getElementById('chatbotSettingsBtn');
+    const chatbotTraining = document.getElementById('chatbotTraining');
+    const trainingClose = document.getElementById('trainingClose');
+    const trainKeywords = document.getElementById('trainKeywords');
+    const trainAnswer = document.getElementById('trainAnswer');
+    const trainSubmit = document.getElementById('trainSubmit');
+    const knowledgeItems = document.getElementById('knowledgeItems');
+
+    // Default knowledge base
+    let knowledgeBase = [
+        {
+            keywords: ['xin chào', 'hello', 'hi', 'chào'],
+            answer: 'Xin chào! 👋 Rất vui được gặp bạn. Tôi có thể giúp gì cho bạn hôm nay?'
+        },
+        {
+            keywords: ['metamuse là gì', 'metamuse', 'giới thiệu', 'là gì'],
+            answer: 'MetaMuse là nền tảng học tập thông minh sử dụng AI để hỗ trợ sinh viên. Chúng tôi cung cấp các công cụ quản lý thời gian, trợ lý AI, theo dõi mục tiêu và làm việc nhóm!'
+        },
+        {
+            keywords: ['giá', 'bao nhiêu', 'chi phí', 'pricing', 'price', 'gói'],
+            answer: '💰 Chúng tôi có 3 gói:\n\n• **Starter (Miễn phí)**: 5 khóa học, AI cơ bản\n• **Pro ($19/tháng)**: Không giới hạn khóa học, AI nâng cao\n• **Enterprise**: Tùy chỉnh cho tổ chức, liên hệ để báo giá'
+        },
+        {
+            keywords: ['tính năng', 'features', 'chức năng', 'có gì'],
+            answer: '🚀 MetaMuse có nhiều tính năng:\n\n• 📚 Smart Learning - Học tập thông minh với AI\n• 📅 Schedule Manager - Quản lý lịch học\n• 🎯 Goal Tracking - Theo dõi mục tiêu\n• 💬 AI Assistant - Trợ lý AI 24/7\n• 👥 Team Projects - Làm việc nhóm\n• 📊 Analytics - Phân tích tiến độ'
+        },
+        {
+            keywords: ['liên hệ', 'contact', 'hỗ trợ', 'support', 'email'],
+            answer: '📧 Bạn có thể liên hệ với chúng tôi qua:\n\n• Email: support@metamuse.com\n• Hotline: 1900-xxxx\n• Facebook: /metamuse\n• Hoặc điền form tại mục Contact trên website!'
+        },
+        {
+            keywords: ['cảm ơn', 'thanks', 'thank you', 'ok', 'được rồi'],
+            answer: 'Không có gì! 😊 Nếu bạn cần thêm thông tin gì khác, cứ hỏi tôi nhé!'
+        },
+        {
+            keywords: ['ai', 'trợ lý', 'chatbot', 'bot'],
+            answer: '🤖 Tôi là MetaMuse AI - trợ lý ảo thông minh! Tôi có thể giúp bạn:\n\n• Trả lời câu hỏi về sản phẩm\n• Hướng dẫn sử dụng tính năng\n• Giải đáp thắc mắc 24/7\n\nBạn cũng có thể dạy tôi thêm kiến thức mới bằng cách nhấn nút 🎓!'
+        },
+        {
+            keywords: ['đăng ký', 'register', 'tạo tài khoản', 'sign up'],
+            answer: '📝 Để đăng ký tài khoản:\n\n1. Nhấn nút "Get Started" trên website\n2. Điền thông tin email và mật khẩu\n3. Xác nhận email\n4. Bắt đầu học ngay!\n\nGói Starter hoàn toàn miễn phí!'
+        }
+    ];
+
+    // Load saved knowledge from localStorage
+    const savedKnowledge = localStorage.getItem('chatbotKnowledge');
+    if (savedKnowledge) {
+        knowledgeBase = JSON.parse(savedKnowledge);
+    }
+
+    // Save knowledge to localStorage
+    function saveKnowledge() {
+        localStorage.setItem('chatbotKnowledge', JSON.stringify(knowledgeBase));
+    }
+
+    // Render knowledge items in training panel
+    function renderKnowledgeItems() {
+        knowledgeItems.innerHTML = '';
+        knowledgeBase.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'knowledge-item';
+            div.innerHTML = `
+                <div class="keywords">${item.keywords.join(', ')}</div>
+                <div class="answer">${item.answer.substring(0, 100)}${item.answer.length > 100 ? '...' : ''}</div>
+                <button class="delete-btn" data-index="${index}"><i class="fa-solid fa-trash"></i></button>
+            `;
+            knowledgeItems.appendChild(div);
+        });
+
+        // Add delete handlers
+        document.querySelectorAll('.knowledge-item .delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const index = parseInt(this.dataset.index);
+                knowledgeBase.splice(index, 1);
+                saveKnowledge();
+                renderKnowledgeItems();
+            });
+        });
+    }
+
+    // Toggle chatbot window
+    chatbotToggle.addEventListener('click', () => {
+        chatbotWindow.classList.toggle('active');
+        chatbotToggle.classList.toggle('active');
+        chatBadge.classList.add('hidden');
+        if (chatbotWindow.classList.contains('active')) {
+            chatInput.focus();
+        }
+    });
+
+    chatbotClose.addEventListener('click', () => {
+        chatbotWindow.classList.remove('active');
+        chatbotToggle.classList.remove('active');
+    });
+
+    // Training panel toggle
+    chatbotSettingsBtn.addEventListener('click', () => {
+        chatbotTraining.classList.add('active');
+        renderKnowledgeItems();
+    });
+
+    trainingClose.addEventListener('click', () => {
+        chatbotTraining.classList.remove('active');
+    });
+
+    // Add new knowledge
+    trainSubmit.addEventListener('click', () => {
+        const keywords = trainKeywords.value.trim().toLowerCase().split(',').map(k => k.trim()).filter(k => k);
+        const answer = trainAnswer.value.trim();
+
+        if (keywords.length > 0 && answer) {
+            knowledgeBase.push({ keywords, answer });
+            saveKnowledge();
+            renderKnowledgeItems();
+            trainKeywords.value = '';
+            trainAnswer.value = '';
+            
+            // Show success message
+            addBotMessage('✅ Đã thêm kiến thức mới! Tôi đã học được cách trả lời về: ' + keywords.join(', '));
+            chatbotTraining.classList.remove('active');
+        }
+    });
+
+    // Get current time
+    function getCurrentTime() {
+        const now = new Date();
+        return now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+    }
+
+    // Add user message
+    function addUserMessage(text) {
+        const div = document.createElement('div');
+        div.className = 'chat-message user';
+        div.innerHTML = `
+            <div class="message-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="message-content">
+                <p>${text}</p>
+                <span class="message-time">${getCurrentTime()}</span>
+            </div>
+        `;
+        chatbotMessages.appendChild(div);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    // Add bot message
+    function addBotMessage(text) {
+        const div = document.createElement('div');
+        div.className = 'chat-message bot';
+        div.innerHTML = `
+            <div class="message-avatar"><i class="fa-solid fa-robot"></i></div>
+            <div class="message-content">
+                <p>${text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</p>
+                <span class="message-time">${getCurrentTime()}</span>
+            </div>
+        `;
+        chatbotMessages.appendChild(div);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    // Show typing indicator
+    function showTyping() {
+        const div = document.createElement('div');
+        div.className = 'chat-message bot typing-message';
+        div.innerHTML = `
+            <div class="message-avatar"><i class="fa-solid fa-robot"></i></div>
+            <div class="message-content">
+                <div class="typing-indicator">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        `;
+        chatbotMessages.appendChild(div);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        return div;
+    }
+
+    // Find answer from knowledge base
+    function findAnswer(question) {
+        const q = question.toLowerCase();
+        
+        for (const item of knowledgeBase) {
+            for (const keyword of item.keywords) {
+                if (q.includes(keyword)) {
+                    return item.answer;
+                }
+            }
+        }
+        
+        // Default response if no match
+        return '🤔 Xin lỗi, tôi chưa hiểu câu hỏi của bạn. Bạn có thể hỏi tôi về:\n\n• MetaMuse là gì?\n• Giá cả các gói?\n• Các tính năng chính?\n• Cách liên hệ hỗ trợ?\n\n💡 Tip: Admin có thể dạy tôi thêm kiến thức mới bằng nút 🎓!';
+    }
+
+    // Send message
+    function sendMessage() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+
+        addUserMessage(text);
+        chatInput.value = '';
+
+        // Hide suggestions after first message
+        chatbotSuggestions.style.display = 'none';
+
+        // Show typing indicator
+        const typingDiv = showTyping();
+
+        // Simulate AI thinking time
+        setTimeout(() => {
+            typingDiv.remove();
+            const answer = findAnswer(text);
+            addBotMessage(answer);
+        }, 800 + Math.random() * 700);
+    }
+
+    chatSendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+    // Suggestion buttons
+    suggestionBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            chatInput.value = btn.textContent;
+            sendMessage();
+        });
     });
 </script>
 </body>
