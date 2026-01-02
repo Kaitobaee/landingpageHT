@@ -22,7 +22,26 @@
         <div class="header-actions">
             <div class="header-icon-btn lang-btn" id="langToggle" title="Switch Language">EN</div>
             <div class="header-icon-btn theme-btn" id="themeToggle" title="Toggle Theme"><i class="fa-solid fa-moon"></i></div>
-            <a href="#pricing" class="header-btn">Get started →</a>
+            <a href="#pricing" class="header-btn desktop-only">Get started →</a>
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <span class="mobile-logo">MetaMuse</span>
+                <div class="mobile-close-btn" id="mobileCloseBtn">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            <nav class="mobile-nav">
+                <a href="#home" class="active">Home</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <a href="#pricing" class="cta-btn mobile-cta">Get started →</a>
         </div>
     </header>
 
@@ -1164,6 +1183,61 @@
         } else {
             icon.className = 'fa-solid fa-sun';
         }
+    });
+
+    // ========== MOBILE MENU ==========
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+
+    function openMobileMenu() {
+        mobileMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    mobileMenuBtn.addEventListener('click', openMobileMenu);
+    mobileCloseBtn.addEventListener('click', closeMobileMenu);
+
+    // Close menu when clicking a link
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closeMobileMenu();
+            // Update active state
+            mobileNavLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+
+    // Update mobile nav active state based on scroll
+    const mobileNavObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                mobileNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + id) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('section[id], .main-card[id]').forEach(section => {
+        mobileNavObserver.observe(section);
     });
 </script>
 </body>

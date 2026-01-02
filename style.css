@@ -1513,3 +1513,724 @@
         body.light-mode .shooting-stars {
             opacity: 0.3;
         }
+
+        /* ========== MOBILE MENU ========== */
+        .mobile-menu-btn {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(5, 5, 10, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            flex-direction: column;
+            padding: 24px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .mobile-logo {
+            font-size: 24px;
+            font-weight: 200;
+            background: linear-gradient(135deg, white, var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .mobile-close-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .mobile-nav a {
+            padding: 18px 24px;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a.active {
+            color: white;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .mobile-cta {
+            margin-top: auto;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .desktop-only {
+            display: inline-flex;
+        }
+
+        /* ========== RESPONSIVE - TABLET ========== */
+        @media (max-width: 1024px) {
+            .sticky-header {
+                width: calc(100% - 48px);
+                padding: 14px 20px;
+            }
+
+            .header-logo {
+                font-size: 22px;
+            }
+
+            .header-nav a {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .main-card {
+                width: calc(100% - 48px);
+                height: auto;
+                min-height: 700px;
+            }
+
+            .left-side {
+                padding: 40px;
+            }
+
+            .hero-title {
+                font-size: 56px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+
+            .pricing-card.popular:hover {
+                transform: translateY(-10px);
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 50px 40px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            .showcase-grid {
+                gap: 40px;
+            }
+
+            .showcase-content h2 {
+                font-size: 36px;
+            }
+
+            .section {
+                padding: 80px 40px;
+            }
+
+            .section-title {
+                font-size: 42px;
+            }
+        }
+
+        /* ========== RESPONSIVE - MOBILE ========== */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 100px;
+            }
+
+            .sticky-header {
+                width: calc(100% - 32px);
+                padding: 12px 16px;
+                grid-template-columns: auto 1fr auto;
+                top: 12px;
+            }
+
+            .header-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .desktop-only {
+                display: none;
+            }
+
+            .header-actions {
+                gap: 8px;
+            }
+
+            .header-icon-btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            .main-card {
+                width: calc(100% - 24px);
+                flex-direction: column;
+                height: auto;
+                min-height: auto;
+                border-radius: 28px;
+                margin: 0 auto 30px;
+            }
+
+            .left-side {
+                padding: 32px 24px;
+                order: 1;
+            }
+
+            .right-side {
+                order: 2;
+                margin: 0;
+                border-radius: 0 0 28px 28px;
+                min-height: 300px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+                letter-spacing: -1px;
+                margin-top: 20px;
+            }
+
+            .user-tag {
+                display: inline-flex;
+                padding: 6px 14px 6px 8px;
+                margin: 0 0 0 5px;
+                gap: 8px;
+            }
+
+            .user-avatars img {
+                width: 28px;
+                height: 28px;
+                margin-right: -10px;
+            }
+
+            .user-count {
+                font-size: 11px;
+            }
+
+            .hero-desc {
+                font-size: 14px;
+                max-width: 100%;
+                margin-top: 24px;
+            }
+
+            .stats {
+                gap: 24px;
+                flex-wrap: wrap;
+            }
+
+            .stat-val {
+                font-size: 22px;
+            }
+
+            .stat-lbl {
+                font-size: 11px;
+            }
+
+            .hero-image {
+                width: 70%;
+                max-width: 280px;
+                right: 10%;
+                top: 50%;
+            }
+
+            .join-portal {
+                left: 15px;
+                top: 120px;
+                padding: 14px 10px;
+                font-size: 10px;
+            }
+
+            .overlap-container {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                padding: 20px;
+                gap: 12px;
+                overflow-x: auto;
+                justify-content: flex-start;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .overlap-container::-webkit-scrollbar {
+                display: none;
+            }
+
+            .feature-card {
+                width: 140px;
+                height: 170px;
+                flex-shrink: 0;
+            }
+
+            .feature-card h4 {
+                font-size: 15px;
+            }
+
+            .feature-card p {
+                font-size: 10px;
+            }
+
+            .feature-card > div {
+                padding: 12px;
+            }
+
+            /* Section Styles */
+            .section {
+                padding: 60px 20px;
+                scroll-margin-top: 100px;
+            }
+
+            .section-header {
+                margin-bottom: 40px;
+            }
+
+            .section-tag {
+                font-size: 11px;
+                padding: 8px 16px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .section-desc {
+                font-size: 15px;
+            }
+
+            /* Features Grid */
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-box {
+                padding: 28px;
+                border-radius: 24px;
+            }
+
+            .feature-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 24px;
+            }
+
+            .feature-box h3 {
+                font-size: 20px;
+            }
+
+            .feature-box p {
+                font-size: 14px;
+            }
+
+            /* Showcase Grid */
+            .showcase-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .showcase-image {
+                order: -1;
+            }
+
+            .showcase-image img {
+                max-width: 300px;
+                margin: 0 auto;
+                display: block;
+            }
+
+            .showcase-content h2 {
+                font-size: 28px;
+            }
+
+            .showcase-content p {
+                font-size: 15px;
+            }
+
+            .showcase-list li {
+                font-size: 14px;
+                padding: 12px 0;
+            }
+
+            /* Stats Section */
+            .stats-section {
+                grid-template-columns: 1fr 1fr;
+                padding: 40px 24px;
+                gap: 32px;
+                border-radius: 28px;
+            }
+
+            .stat-box .number {
+                font-size: 40px;
+            }
+
+            .stat-box .label {
+                font-size: 13px;
+            }
+
+            /* Pricing Grid */
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .pricing-card {
+                padding: 32px 24px;
+                border-radius: 24px;
+            }
+
+            .pricing-card.popular {
+                transform: none;
+                order: -1;
+            }
+
+            .pricing-card.popular:hover {
+                transform: translateY(-8px);
+            }
+
+            .pricing-card .price {
+                font-size: 42px;
+            }
+
+            /* Team Grid */
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+
+            .team-card {
+                padding: 24px 16px;
+                border-radius: 20px;
+            }
+
+            .team-card img {
+                width: 70px;
+                height: 70px;
+            }
+
+            .team-card h4 {
+                font-size: 15px;
+            }
+
+            .team-card .role {
+                font-size: 11px;
+            }
+
+            /* CTA Buttons */
+            .cta-btn {
+                padding: 14px 28px;
+                font-size: 14px;
+            }
+
+            /* Footer */
+            .footer {
+                padding: 50px 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .footer-brand h2 {
+                font-size: 26px;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .footer-links h4 {
+                margin-bottom: 16px;
+            }
+
+            .footer-bottom {
+                font-size: 12px;
+            }
+
+            /* Logo Marquee */
+            .logo-marquee {
+                padding: 24px 0;
+            }
+
+            .marquee-item img {
+                height: 20px;
+            }
+        }
+
+        /* ========== RESPONSIVE - SMALL MOBILE ========== */
+        @media (max-width: 480px) {
+            .sticky-header {
+                width: calc(100% - 24px);
+                padding: 10px 14px;
+                border-radius: 18px;
+            }
+
+            .header-logo {
+                font-size: 20px;
+            }
+
+            .main-card {
+                width: calc(100% - 16px);
+                border-radius: 24px;
+            }
+
+            .left-side {
+                padding: 24px 20px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .user-tag {
+                padding: 5px 10px 5px 6px;
+                gap: 6px;
+                margin-left: 4px;
+            }
+
+            .user-avatars img {
+                width: 24px;
+                height: 24px;
+                border-width: 2px;
+            }
+
+            .user-count {
+                font-size: 10px;
+            }
+
+            .hero-desc {
+                font-size: 13px;
+            }
+
+            .stats {
+                gap: 16px;
+            }
+
+            .stat-val {
+                font-size: 18px;
+            }
+
+            .stat-lbl {
+                font-size: 10px;
+            }
+
+            .bottom-info {
+                padding-bottom: 10px;
+            }
+
+            .right-side {
+                min-height: 250px;
+            }
+
+            .hero-image {
+                width: 65%;
+                max-width: 220px;
+            }
+
+            .join-portal {
+                display: none;
+            }
+
+            .overlap-container {
+                padding: 16px;
+                gap: 10px;
+            }
+
+            .feature-card {
+                width: 120px;
+                height: 150px;
+                border-radius: 16px;
+            }
+
+            .feature-card h4 {
+                font-size: 13px;
+            }
+
+            .feature-card p {
+                font-size: 9px;
+            }
+
+            .section {
+                padding: 48px 16px;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+
+            .section-desc {
+                font-size: 14px;
+            }
+
+            .features-grid {
+                gap: 16px;
+            }
+
+            .feature-box {
+                padding: 24px 20px;
+            }
+
+            .feature-box h3 {
+                font-size: 18px;
+            }
+
+            .showcase-content h2 {
+                font-size: 24px;
+            }
+
+            .showcase-image img {
+                max-width: 240px;
+            }
+
+            .stats-section {
+                padding: 32px 20px;
+                gap: 24px;
+                border-radius: 24px;
+            }
+
+            .stat-box .number {
+                font-size: 32px;
+            }
+
+            .stat-box .label {
+                font-size: 12px;
+            }
+
+            .pricing-card {
+                padding: 28px 20px;
+            }
+
+            .pricing-card .price {
+                font-size: 36px;
+            }
+
+            .team-grid {
+                gap: 12px;
+            }
+
+            .team-card {
+                padding: 20px 12px;
+            }
+
+            .team-card img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .cta-btn {
+                padding: 12px 24px;
+                font-size: 13px;
+            }
+
+            .footer {
+                padding: 40px 16px;
+            }
+
+            .footer-brand h2 {
+                font-size: 22px;
+            }
+        }
+
+        /* ========== LIGHT MODE MOBILE MENU ========== */
+        body.light-mode .mobile-menu {
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        body.light-mode .mobile-logo {
+            background: linear-gradient(135deg, #1a1a2e, var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        body.light-mode .mobile-close-btn {
+            border-color: rgba(0,0,0,0.15);
+            background: rgba(0,0,0,0.05);
+            color: #1a1a2e;
+        }
+
+        body.light-mode .mobile-nav a {
+            color: #666;
+        }
+
+        body.light-mode .mobile-nav a:hover,
+        body.light-mode .mobile-nav a.active {
+            color: #1a1a2e;
+            background: rgba(0,0,0,0.05);
+        }
+
+        body.light-mode .mobile-menu-btn {
+            border-color: rgba(0,0,0,0.15);
+            background: rgba(0,0,0,0.05);
+            color: #1a1a2e;
+        }
