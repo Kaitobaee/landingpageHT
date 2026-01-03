@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MetaMuse - UI Redesign</title>
+    <title>MetaMuse - Nền Tảng Học Tập Thông Minh</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -14,15 +14,24 @@
     <header class="sticky-header" id="stickyHeader">
         <a href="#home" class="header-logo">MetaMuse</a>
         <nav class="header-nav">
-            <a href="#home" class="active">Home</a>
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#contact">Contact</a>
+            <a href="#home" class="active" data-lang-en="Home" data-lang-vi="Trang chủ">Home</a>
+            <div class="nav-dropdown">
+                <a href="#features" class="dropdown-toggle" data-lang-en="Features" data-lang-vi="Tính năng">Features <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="dropdown-menu">
+                    <a href="#showcase-learn"><i class="fa-solid fa-globe"></i> <span data-lang-en="Learn Anywhere" data-lang-vi="Học mọi nơi">Learn Anywhere</span></a>
+                    <a href="#showcase-time"><i class="fa-solid fa-clock"></i> <span data-lang-en="Time Management" data-lang-vi="Quản lý thời gian">Time Management</span></a>
+                    <a href="#showcase-ai"><i class="fa-solid fa-robot"></i> <span data-lang-en="AI Tutor" data-lang-vi="Gia sư AI">AI Tutor</span></a>
+                    <a href="#showcase-team"><i class="fa-solid fa-users"></i> <span data-lang-en="Teamwork" data-lang-vi="Làm việc nhóm">Teamwork</span></a>
+                    <a href="#showcase-goals"><i class="fa-solid fa-bullseye"></i> <span data-lang-en="Goals" data-lang-vi="Mục tiêu">Goals</span></a>
+                </div>
+            </div>
+            <a href="#register" data-lang-en="Register" data-lang-vi="Đăng ký">Đăng ký</a>
+            <a href="#contact" data-lang-en="Contact" data-lang-vi="Liên hệ">Liên hệ</a>
         </nav>
         <div class="header-actions">
-            <div class="header-icon-btn lang-btn" id="langToggle" title="Switch Language">EN</div>
-            <div class="header-icon-btn theme-btn" id="themeToggle" title="Toggle Theme"><i class="fa-solid fa-moon"></i></div>
-            <a href="#pricing" class="header-btn desktop-only">Get started →</a>
+            <div class="header-icon-btn lang-btn" id="langToggle" title="Chuyển ngôn ngữ">EN</div>
+            <div class="header-icon-btn theme-btn" id="themeToggle" title="Chuyển giao diện"><i class="fa-solid fa-moon"></i></div>
+            <a href="#register" class="header-btn desktop-only" data-lang-en="Register →" data-lang-vi="Đăng ký →">Đăng ký →</a>
             <div class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fa-solid fa-bars"></i>
             </div>
@@ -36,19 +45,31 @@
                 </div>
             </div>
             <nav class="mobile-nav">
-                <a href="#home" class="active">Home</a>
-                <a href="#features">Features</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#contact">Contact</a>
+                <a href="#home" class="active" data-lang-en="Home" data-lang-vi="Trang chủ">Trang chủ</a>
+                <div class="mobile-dropdown">
+                    <div class="mobile-dropdown-toggle">
+                        <span data-lang-en="Features" data-lang-vi="Tính năng">Tính năng</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="mobile-dropdown-menu">
+                        <a href="#showcase-learn"><i class="fa-solid fa-globe"></i> <span data-lang-en="Learn Anywhere" data-lang-vi="Học mọi nơi">Học mọi nơi</span></a>
+                        <a href="#showcase-time"><i class="fa-solid fa-clock"></i> <span data-lang-en="Time Management" data-lang-vi="Quản lý thời gian">Quản lý thời gian</span></a>
+                        <a href="#showcase-ai"><i class="fa-solid fa-robot"></i> <span data-lang-en="AI Tutor" data-lang-vi="Gia sư AI">Gia sư AI</span></a>
+                        <a href="#showcase-team"><i class="fa-solid fa-users"></i> <span data-lang-en="Teamwork" data-lang-vi="Làm việc nhóm">Làm việc nhóm</span></a>
+                        <a href="#showcase-goals"><i class="fa-solid fa-bullseye"></i> <span data-lang-en="Goals" data-lang-vi="Mục tiêu">Mục tiêu</span></a>
+                    </div>
+                </div>
+                <a href="#register" data-lang-en="Register" data-lang-vi="Đăng ký">Đăng ký</a>
+                <a href="#contact" data-lang-en="Contact" data-lang-vi="Liên hệ">Liên hệ</a>
             </nav>
-            <a href="#pricing" class="cta-btn mobile-cta">Get started →</a>
+            <a href="#register" class="cta-btn mobile-cta" data-lang-en="Register Now →" data-lang-vi="Đăng ký ngay →">Đăng ký ngay →</a>
         </div>
     </header>
 
-    <!-- Sao băng background (chỉ hiện ở Home) -->
+    <!-- Sao bang background (chi hien o Home) -->
     <div class="shooting-stars" id="shootingStars"></div>
 
-    <!-- Tuyết rơi background (hiện ở các section khác) -->
+    <!-- Tuyet roi background (hien o cac section khac) -->
     <div class="snow-container" id="snowContainer"></div>
 
     <div class="main-card" id="home">
@@ -57,38 +78,38 @@
 
             <div class="hero-section">
                 <h1 class="hero-title">
-                    This is not<br>
-                    just <span>
+                    Học tập<br>
+                    thông minh <span>
                     <div class="user-tag">
                         <div class="user-avatars">
                             <img src="https://i.pravatar.cc/100?u=1" alt="">
                             <img src="https://i.pravatar.cc/100?u=2" alt="">
                             <img src="https://i.pravatar.cc/100?u=3" alt="">
                         </div>
-                        <span class="user-count">50K+ users</span>
+                        <span class="user-count">50K+ học viên</span>
                     </div></span><br>
-                    technology —<br>
-                    it's evolution
+                    cùng công nghệ<br>
+                    AI hiện đại
                 </h1>
                 
                 <p class="hero-desc">
-                    Create next-gen AI avatars for your virtual world — express, explore, and own your identity.
+                    Nền tảng học tập thông minh với AI hỗ trợ 24/7, giúp bạn đạt mục tiêu học tập nhanh và hiệu quả hơn.
                 </p>
             </div>
 
             <div class="bottom-info">
                 <div class="stats">
                     <div class="stat-item">
-                        <div class="stat-val">10K+</div>
-                        <div class="stat-lbl">Rare NFTs</div>
+                        <div class="stat-val">200+</div>
+                        <div class="stat-lbl">Khóa học</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-val">70K+</div>
-                        <div class="stat-lbl">Products</div>
+                        <div class="stat-val">50K+</div>
+                        <div class="stat-lbl">Học viên</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-val">05K+</div>
-                        <div class="stat-lbl">NFT Artist</div>
+                        <div class="stat-val">98%</div>
+                        <div class="stat-lbl">Hài lòng</div>
                     </div>
                 </div>
             </div>
@@ -103,7 +124,7 @@
 
 
             <div class="join-portal">
-                Join Portal <i class="fa-solid fa-arrow-up"></i>
+                Tham gia ngay <i class="fa-solid fa-arrow-up"></i>
             </div>
 
 
@@ -112,10 +133,10 @@
 
         <div class="overlap-container">
             <div class="feature-card active" data-image="hinhanh/SVG/desi/Schedule-cuate.svg">
-                <img src="hinhanh/SVG/desi/Schedule-cuate.svg" alt="Create">
+                <img src="hinhanh/SVG/desi/Schedule-cuate.svg" alt="Lịch học">
                 <div>
-                    <h4>Create</h4>
-                    <p>Generate your AI avatar</p>
+                    <h4>Lịch học</h4>
+                    <p>Quản lý thời gian hiệu quả</p>
                 </div>
                 <div class="card-arrows">
                     <i class="fa-solid fa-arrow-left"></i>
@@ -123,17 +144,17 @@
                 </div>
             </div>
             <div class="feature-card" data-image="hinhanh/SVG/desi/Learning-cuate.svg">
-                <img src="hinhanh/SVG/desi/Learning-cuate.svg" alt="Style">
+                <img src="hinhanh/SVG/desi/Learning-cuate.svg" alt="Học tập">
                 <div>
-                    <h4>Style</h4>
-                    <p>Customize with your vibe</p>
+                    <h4>Học tập</h4>
+                    <p>Khóa học đa dạng chất lượng</p>
                 </div>
             </div>
             <div class="feature-card" data-image="hinhanh/SVG/desi/Research paper-cuate.svg">
-                <img src="hinhanh/SVG/desi/Research paper-cuate.svg" alt="Mint">
+                <img src="hinhanh/SVG/desi/Research paper-cuate.svg" alt="Nghiên cứu">
                 <div>
-                    <h4>Mint</h4>
-                    <p>Secure it on-chain</p>
+                    <h4>Nghiên cứu</h4>
+                    <p>Tài liệu phong phú</p>
                 </div>
             </div>
         </div>
@@ -178,23 +199,23 @@
         </div>
 
         <div class="features-grid">
-            <div class="feature-box">
-                <div class="feature-icon">📚</div>
+            <div class="feature-box" id="feature-ai">
+                <div class="feature-icon">🧠</div>
                 <h3>Smart Learning</h3>
                 <p>AI-powered learning paths that adapt to your pace and style for maximum retention.</p>
             </div>
-            <div class="feature-box">
+            <div class="feature-box" id="feature-design">
                 <div class="feature-icon">📅</div>
                 <h3>Schedule Manager</h3>
                 <p>Organize your study sessions with intelligent scheduling and deadline tracking.</p>
             </div>
-            <div class="feature-box">
+            <div class="feature-box" id="feature-dev">
                 <div class="feature-icon">🎯</div>
                 <h3>Goal Tracking</h3>
                 <p>Set and achieve your academic goals with progress visualization and milestones.</p>
             </div>
-            <div class="feature-box">
-                <div class="feature-icon">💬</div>
+            <div class="feature-box" id="feature-auto">
+                <div class="feature-icon">🤖</div>
                 <h3>AI Assistant</h3>
                 <p>Get instant help with your questions from our intelligent chatbot tutor.</p>
             </div>
@@ -212,13 +233,13 @@
     </section>
 
     <!-- ========== SHOWCASE SECTION 1 ========== -->
-    <section class="section">
+    <section class="section" id="showcase-learn">
         <div class="showcase-grid">
             <div class="showcase-image">
                 <img src="hinhanh/SVG/desi/Online learning-cuate.svg" alt="Online Learning">
             </div>
             <div class="showcase-content">
-                <h2>Learn <span>anywhere,<br>anytime</span> you want</h2>
+                <h2 >Learn <span>anywhere,<br>anytime</span> you want</h2>
                 <p>Access your courses and materials from any device. Our platform is designed for flexibility, allowing you to learn at your own pace.</p>
                 <ul class="showcase-list">
                     <li><i class="fa-solid fa-check-circle"></i> Mobile-friendly interface</li>
@@ -254,7 +275,7 @@
     </section>
 
     <!-- ========== SHOWCASE SECTION 2 ========== -->
-    <section class="section">
+    <section class="section" id="showcase-time">
         <div class="showcase-grid">
             <div class="showcase-content">
                 <h2>Manage your<br><span>time effectively</span></h2>
@@ -277,7 +298,7 @@
     </section>
 
     <!-- ========== AI ASSISTANT SECTION ========== -->
-    <section class="section">
+    <section class="section" id="showcase-ai">
         <div class="showcase-grid">
             <div class="showcase-image">
                 <img src="hinhanh/SVG/desi/Chat bot-pana.svg" alt="AI Chatbot">
@@ -297,7 +318,7 @@
     </section>
 
     <!-- ========== TEAM PROJECTS SECTION ========== -->
-    <section class="section">
+    <section class="section" id="showcase-team">
         <div class="section-header">
   
             <h2 class="section-title">Work together,<br><span>achieve more</span></h2>
@@ -323,7 +344,7 @@
     </section>
 
     <!-- ========== GOALS SECTION ========== -->
-    <section class="section">
+    <section class="section" id="showcase-goals">
         <div class="showcase-grid">
             <div class="showcase-image">
                 <img src="hinhanh/SVG/desi/Goal-bro.svg" alt="Goals">
@@ -342,54 +363,91 @@
         </div>
     </section>
 
-    <!-- ========== PRICING SECTION ========== -->
-    <section class="section" id="pricing">
+    <!-- ========== REGISTER SECTION ========== -->
+    <section class="section" id="register">
         <div class="section-header">
-
-            <h2 class="section-title">Simple, transparent<br><span>pricing</span></h2>
-            <p class="section-desc">Choose the plan that fits your learning journey.</p>
+            <span class="section-tag">📝 Đăng ký</span>
+            <h2 class="section-title">Đăng ký ngay<br><span>để bắt đầu học</span></h2>
+            <p class="section-desc">Điền thông tin để nhận tư vấn miễn phí và trải nghiệm nền tảng học tập thông minh.</p>
         </div>
 
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <h3>Starter</h3>
-                <p style="color: #888;">Perfect for beginners</p>
-                <div class="price">Free<span></span></div>
-                <ul>
-                    <li><i class="fa-solid fa-check"></i> 5 courses access</li>
-                    <li><i class="fa-solid fa-check"></i> Basic AI assistant</li>
-                    <li><i class="fa-solid fa-check"></i> Schedule manager</li>
-                    <li><i class="fa-solid fa-check"></i> Community support</li>
-                </ul>
-                <a href="#" class="cta-btn cta-btn-outline" style="width: 100%; justify-content: center;">Get Started</a>
-            </div>
-
-            <div class="pricing-card popular">
-                <h3>Pro</h3>
-                <p style="color: #888;">Most popular choice</p>
-                <div class="price">$19<span>/month</span></div>
-                <ul>
-                    <li><i class="fa-solid fa-check"></i> Unlimited courses</li>
-                    <li><i class="fa-solid fa-check"></i> Advanced AI tutor</li>
-                    <li><i class="fa-solid fa-check"></i> Team collaboration</li>
-                    <li><i class="fa-solid fa-check"></i> Priority support</li>
-                    <li><i class="fa-solid fa-check"></i> Analytics dashboard</li>
-                </ul>
-                <a href="#" class="cta-btn" style="width: 100%; justify-content: center;">Start Pro</a>
-            </div>
-
-            <div class="pricing-card">
-                <h3>Enterprise</h3>
-                <p style="color: #888;">For institutions</p>
-                <div class="price">Custom<span></span></div>
-                <ul>
-                    <li><i class="fa-solid fa-check"></i> Everything in Pro</li>
-                    <li><i class="fa-solid fa-check"></i> Custom branding</li>
-                    <li><i class="fa-solid fa-check"></i> Admin dashboard</li>
-                    <li><i class="fa-solid fa-check"></i> API access</li>
-                    <li><i class="fa-solid fa-check"></i> Dedicated support</li>
-                </ul>
-                <a href="#" class="cta-btn cta-btn-outline" style="width: 100%; justify-content: center;">Contact Sales</a>
+        <div class="register-container">
+            <div class="register-form-wrapper">
+                <div class="register-info">
+                    <h3>Tại sao chọn MetaMuse?</h3>
+                    <ul class="register-benefits">
+                        <li><i class="fa-solid fa-check-circle"></i> Trợ lý AI hỗ trợ 24/7</li>
+                        <li><i class="fa-solid fa-check-circle"></i> Hơn 200+ khóa học chất lượng</li>
+                        <li><i class="fa-solid fa-check-circle"></i> Học mọi lúc, mọi nơi</li>
+                        <li><i class="fa-solid fa-check-circle"></i> Cộng đồng học viên sôi động</li>
+                        <li><i class="fa-solid fa-check-circle"></i> Chứng chỉ được công nhận</li>
+                    </ul>
+                    <div class="register-stats">
+                        <div class="register-stat">
+                            <span class="stat-number">50K+</span>
+                            <span class="stat-text">Học viên</span>
+                        </div>
+                        <div class="register-stat">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-text">Hài lòng</span>
+                        </div>
+                        <div class="register-stat">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-text">Hỗ trợ</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="register-form" id="registerForm">
+                    <h3>Thông tin đăng ký</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullname"><i class="fa-solid fa-user"></i> Họ và tên</label>
+                            <input type="text" id="fullname" name="fullname" placeholder="Nhập họ và tên" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"><i class="fa-solid fa-phone"></i> Số điện thoại</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email"><i class="fa-solid fa-envelope"></i> Email</label>
+                        <input type="email" id="email" name="email" placeholder="Nhập địa chỉ email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="course"><i class="fa-solid fa-book"></i> Khóa học quan tâm</label>
+                        <select id="course" name="course" required>
+                            <option value="">-- Chọn khóa học --</option>
+                            <option value="ai">Trí tuệ nhân tạo (AI)</option>
+                            <option value="programming">Lập trình</option>
+                            <option value="design">Thiết kế</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="language">Ngoại ngữ</option>
+                            <option value="other">Khác</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message"><i class="fa-solid fa-message"></i> Tin nhắn (tùy chọn)</label>
+                        <textarea id="message" name="message" rows="3" placeholder="Bạn muốn hỏi gì về khóa học?"></textarea>
+                    </div>
+                    
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="agree" name="agree" required>
+                        <label for="agree">Tôi đồng ý với <a href="#">Điều khoản dịch vụ</a> và <a href="#">Chính sách bảo mật</a></label>
+                    </div>
+                    
+                    <button type="submit" class="cta-btn submit-btn">
+                        <i class="fa-solid fa-paper-plane"></i> Đăng ký ngay
+                    </button>
+                    
+                    <p class="form-note">
+                        <i class="fa-solid fa-shield-halved"></i> Thông tin của bạn được bảo mật tuyệt đối
+                    </p>
+                </form>
             </div>
         </div>
     </section>
@@ -397,16 +455,16 @@
     <!-- ========== CTA SECTION ========== -->
     <section class="section">
         <div style="text-align: center; background: linear-gradient(135deg, rgba(255,45,149,0.15), rgba(0,210,255,0.15)); border-radius: 40px; padding: 100px 60px; border: 1px solid rgba(255,255,255,0.1);">
-            <h2 class="section-title">Ready to start your<br><span>learning journey?</span></h2>
-            <p class="section-desc" style="margin-bottom: 40px;">Join thousands of students who are already achieving their goals with our platform.</p>
+            <h2 class="section-title">Sẵn sàng bắt đầu<br><span>hành trình học tập?</span></h2>
+            <p class="section-desc" style="margin-bottom: 40px;">Tham gia cùng hàng nghìn học viên đã đạt được mục tiêu với nền tảng của chúng tôi.</p>
             <div style="display: flex; gap: 20px; justify-content: center;">
-                <a href="#" class="cta-btn">Get Started Free <i class="fa-solid fa-arrow-right"></i></a>
-                <a href="#" class="cta-btn cta-btn-outline">Watch Demo <i class="fa-solid fa-play"></i></a>
+                <a href="#" class="cta-btn">Bắt đầu miễn phí <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#" class="cta-btn cta-btn-outline">Xem Demo <i class="fa-solid fa-play"></i></a>
             </div>
             <div style="margin-top: 40px; display: flex; justify-content: center; gap: 40px; color: #888; font-size: 14px;">
-                <span><i class="fa-solid fa-check" style="color: var(--accent-blue); margin-right: 8px;"></i>No credit card required</span>
-                <span><i class="fa-solid fa-check" style="color: var(--accent-blue); margin-right: 8px;"></i>14-day free trial</span>
-                <span><i class="fa-solid fa-check" style="color: var(--accent-blue); margin-right: 8px;"></i>Cancel anytime</span>
+                <span><i class="fa-solid fa-check" style="color: var(--accent-blue); margin-right: 8px;"></i>Không cần thẻ tín dụng</span>
+                <span><i class="fa-solid fa-check" style="color: var(--accent-blue); margin-right: 8px;"></i>Dùng thử 14 ngày</span>
+                <span><i class="fa-solid fa-check" style="color: var(--accent-blue); margin-right: 8px;"></i>Hủy bất cứ lúc nào</span>
             </div>
         </div>
     </section>
@@ -416,7 +474,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <h2>MetaMuse</h2>
-                <p>Empowering students worldwide with intelligent learning tools and AI-powered education.</p>
+                <p>Trao quyền cho học sinh toàn cầu với công cụ học thông minh và giáo dục AI.</p>
                 <div class="social-links">
                     <a href="#"><i class="fa-brands fa-twitter"></i></a>
                     <a href="#"><i class="fa-brands fa-facebook"></i></a>
@@ -426,35 +484,35 @@
                 </div>
             </div>
             <div class="footer-links">
-                <h4>Product</h4>
+                <h4>Sản phẩm</h4>
                 <ul>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Integrations</a></li>
+                    <li><a href="#features">Tính năng</a></li>
+                    <li><a href="#pricing">Bảng giá</a></li>
+                    <li><a href="#">Tích hợp</a></li>
                     <li><a href="#">API</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>Company</h4>
+                <h4>Công ty</h4>
                 <ul>
-                    <li><a href="#">About</a></li>
+                    <li><a href="#">Giới thiệu</a></li>
                     <li><a href="#">Blog</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Tuyển dụng</a></li>
+                    <li><a href="#">Báo chí</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>Support</h4>
+                <h4>Hỗ trợ</h4>
                 <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Trung tâm trợ giúp</a></li>
+                    <li><a href="#contact">Liên hệ</a></li>
+                    <li><a href="#">Quyền riêng tư</a></li>
+                    <li><a href="#">Điều khoản</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 MetaMuse. All rights reserved. Made with ❤️ for students.</p>
+            <p>© 2026 MetaMuse. Bảo lưu mọi quyền. Được tạo với ❤️ cho học sinh.</p>
         </div>
     </footer>
 
@@ -509,7 +567,8 @@
     </div>
 
 <script>
-    // Tạo sao băng - MÀU TÍM HUYỀN ẢO + TO + NHIỀU
+document.addEventListener('DOMContentLoaded', function() {
+    // Tao sao bang - MAU TIM HUYEN AO + TO + NHIEU
     const shootingStarsContainer = document.getElementById('shootingStars');
     const snowContainer = document.getElementById('snowContainer');
     const homeSection = document.getElementById('home');
@@ -518,17 +577,17 @@
         const star = document.createElement('div');
         star.className = 'star';
         
-        // Vị trí bắt đầu (ngoài màn hình bên trái/trên)
+        // Vi tri bat dau (ngoai man hinh ben trai/tren)
         const x = Math.random() * window.innerWidth * 1.5 - window.innerWidth * 0.3;
         const y = Math.random() * (window.innerHeight * 0.4) - 150;
         
-        // Kích thước lớn (rõ rệt hơn)
-        const size = 3.5 + Math.random() * 3.5; // 3.5px → 7px
+        // Kich thuoc lon (ro ret hon)
+        const size = 3.5 + Math.random() * 3.5; // 3.5px - 7px
         
-        // Tốc độ đa dạng
+        // Toc do da dang
         const duration = 1.6 + Math.random() * 2.4;
         
-        // Độ sáng
+        // Do sang
         const opacity = 0.8 + Math.random() * 0.2;
 
         star.style.left = x + 'px';
@@ -538,8 +597,8 @@
         star.style.opacity = opacity;
         star.style.animationDuration = duration + 's';
         
-        // MÀU TÍM HUYỀN ẢO (purple neon + glow tím hồng)
-        star.style.background = '#c678ff'; // tím chủ đạo
+        // MAU TIM HUYEN AO (purple neon + glow tim hong)
+        star.style.background = '#c678ff'; // tim chu dao
         star.style.boxShadow = `
             0 0 ${18 + Math.random() * 25}px #c678ff,
             0 0 ${40 + Math.random() * 40}px #ba7eff,
@@ -547,7 +606,7 @@
             0 0 ${100}px rgba(255, 45, 149, 0.3)
         `;
 
-        // Đuôi sao dài, gradient tím → hồng huyền ảo
+        // Duoi sao dai, gradient tim hong huyen ao
         star.style.setProperty('--tail-length', (50 + Math.random() * 50) + 'px');
         
         document.getElementById('shootingStars').appendChild(star);
@@ -557,24 +616,24 @@
         }, duration * 1000 + 1000);
     }
 
-    // ========== TẠO TUYẾT RƠI ==========
+    // ========== TAO TUYET ROI ==========
     function createSnowflake() {
         const snow = document.createElement('div');
         snow.className = 'snowflake';
         
-        // Vị trí ngẫu nhiên theo chiều ngang
+        // Vi tri ngau nhien theo chieu ngang
         const x = Math.random() * window.innerWidth;
         
-        // Kích thước ngẫu nhiên
+        // Kich thuoc ngau nhien
         const size = 2 + Math.random() * 4;
         
-        // Tốc độ rơi
+        // Toc do roi
         const duration = 8 + Math.random() * 12;
         
-        // Độ mờ
+        // Do mo
         const opacity = 0.3 + Math.random() * 0.5;
         
-        // Dao động ngang
+        // Dao dong ngang
         const drift = -50 + Math.random() * 100;
 
         snow.style.left = x + 'px';
@@ -592,15 +651,15 @@
         }, duration * 1000);
     }
 
-    // Tạo tuyết liên tục
+    // Tao tuyet lien tuc
     setInterval(createSnowflake, 100);
 
-    // Tạo tuyết ban đầu
+    // Tao tuyet ban dau
     for (let i = 0; i < 50; i++) {
         setTimeout(createSnowflake, i * 50);
     }
 
-    // ========== ĐIỀU KHIỂN HIỂN THỊ SAO BĂNG VÀ TUYẾT ==========
+    // ========== DIEU KHIEN HIEN THI SAO BANG VA TUYET ==========
     function updateEffectsVisibility() {
         const homeRect = homeSection.getBoundingClientRect();
         const isHomeVisible = homeRect.bottom > 0 && homeRect.top < window.innerHeight;
@@ -614,19 +673,19 @@
         }
     }
 
-    // Kiểm tra khi scroll
+    // Kiem tra khi scroll
     window.addEventListener('scroll', updateEffectsVisibility);
-    updateEffectsVisibility(); // Chạy lần đầu
+    updateEffectsVisibility(); // Chay lan dau
 
-    // Tạo sao băng tím
+    // Tao sao bang tim
     setInterval(createShootingStar, 200);
 
-    // Đợt lớn khi load trang
+    // Dot lon khi load trang
     for (let i = 0; i < 25; i++) {
         setTimeout(createShootingStar, i * 80);
     }
 
-    // Burst ngẫu nhiên để luôn có mưa sao băng tím
+    // Burst ngau nhien de luon co mua sao bang tim
     setInterval(() => {
         const burst = 4 + Math.floor(Math.random() * 6);
         for (let i = 0; i < burst; i++) {
@@ -640,27 +699,27 @@
     
     featureCards.forEach(card => {
         card.addEventListener('click', function() {
-            // Lấy đường dẫn hình ảnh từ data attribute
+            // Lay duong dan hinh anh tu data attribute
             const newImageSrc = this.getAttribute('data-image');
             
-            // Hiệu ứng fade out
+            // Hieu ung fade out
             heroImage.style.opacity = '0';
             heroImage.style.transform = 'translateY(-50%) scale(0.95)';
             
-            // Đợi animation xong rồi đổi ảnh
+            // Doi animation xong roi doi anh
             setTimeout(() => {
                 heroImage.src = newImageSrc;
                 
-                // Hiệu ứng fade in
+                // Hieu ung fade in
                 heroImage.style.opacity = '1';
                 heroImage.style.transform = 'translateY(-50%)';
             }, 300);
             
-            // Cập nhật active state cho cards
+            // Cap nhat active state cho cards
             featureCards.forEach(c => c.classList.remove('active'));
             this.classList.add('active');
             
-            // Di chuyển arrows sang card active mới
+            // Di chuyen arrows sang card active moi
             const arrows = document.querySelector('.card-arrows');
             if (arrows) {
                 arrows.remove();
@@ -707,37 +766,80 @@
 
     // ========== STICKY HEADER SCROLL EFFECT ==========
     const stickyHeader = document.getElementById('stickyHeader');
-    const navLinks = document.querySelectorAll('.header-nav a');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+    const navLinks = document.querySelectorAll('.header-nav > a, .header-nav .dropdown-toggle');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav > a');
     const sections = document.querySelectorAll('#home, #features, #pricing, #contact');
-    // Tăng giá trị này nếu bạn muốn "xuống thêm" cho vừa khung.
     const SCROLL_EXTRA_GAP = 90;
 
     function setActiveNavById(id) {
-        // Update desktop nav
-        navLinks.forEach(link => {
+        // Update desktop nav - direct links
+        document.querySelectorAll('.header-nav > a').forEach(link => {
             link.classList.toggle('active', link.getAttribute('href') === '#' + id);
         });
+        
+        // Update desktop nav - dropdown toggles
+        document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            const dropdownLinks = dropdown.querySelectorAll('.dropdown-menu a');
+            let isActive = false;
+            
+            // Check if toggle href matches
+            if (toggle.getAttribute('href') === '#' + id) {
+                isActive = true;
+            }
+            
+            // Check if any dropdown link href matches
+            dropdownLinks.forEach(link => {
+                if (link.getAttribute('href') === '#' + id) {
+                    isActive = true;
+                }
+            });
+            
+            toggle.classList.toggle('active', isActive);
+        });
+        
         // Update mobile nav
         mobileNavLinks.forEach(link => {
             link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+        
+        // Update mobile dropdown toggles
+        document.querySelectorAll('.mobile-dropdown').forEach(dropdown => {
+            const links = dropdown.querySelectorAll('.mobile-dropdown-menu a');
+            let isActive = false;
+            links.forEach(link => {
+                if (link.getAttribute('href') === '#' + id) {
+                    isActive = true;
+                }
+            });
+            if (isActive) {
+                dropdown.querySelector('.mobile-dropdown-toggle').classList.add('active');
+            } else {
+                dropdown.querySelector('.mobile-dropdown-toggle').classList.remove('active');
+            }
         });
     }
 
     function updateActiveNavOnScroll() {
         const headerRect = stickyHeader.getBoundingClientRect();
-        const markerY = headerRect.bottom + SCROLL_EXTRA_GAP; // điểm “đang xem” ngay dưới header (theo đúng khung header đang nổi)
+        const markerY = headerRect.bottom + SCROLL_EXTRA_GAP;
 
-        // Mặc định Home khi ở gần đầu trang
+        // Default Home when at top
         if (window.scrollY < 120) {
             setActiveNavById('home');
+            return;
+        }
+
+        // Active Contact when near bottom
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+            setActiveNavById('contact');
             return;
         }
 
         let currentId = 'home';
         sections.forEach(section => {
             const rect = section.getBoundingClientRect();
-            if (rect.top <= markerY && rect.bottom > markerY) {
+            if (rect.top <= markerY) {
                 currentId = section.id;
             }
         });
@@ -765,7 +867,7 @@
 
             const headerRect = stickyHeader.getBoundingClientRect();
             const targetTop = target.getBoundingClientRect().top + window.pageYOffset;
-            // Canh theo đúng đáy header (vì header đang có top offset), rồi chừa thêm khoảng trống.
+            // Canh theo dong day header (vi header dang co top offset), roi chua them khoang trong
             const y = Math.max(0, targetTop - headerRect.bottom - SCROLL_EXTRA_GAP);
 
             window.scrollTo({ top: y, behavior: 'smooth' });
@@ -777,7 +879,7 @@
 
     // ========== LANGUAGE TOGGLE ==========
     const langToggle = document.getElementById('langToggle');
-    let currentLang = 'EN';
+    let currentLang = 'VI';
     
     // Định nghĩa TẤT CẢ text cần dịch
     const translations = {
@@ -785,27 +887,27 @@
             // Header
             navHome: 'Home',
             navFeatures: 'Features',
-            navPricing: 'Pricing',
+            navRegister: 'Register',
             navContact: 'Contact',
-            headerBtn: 'Get started →',
+            headerBtn: 'Register →',
             
             // Hero
-            heroTitle: `This is not<br>just <span><div class="user-tag"><div class="user-avatars"><img src="https://i.pravatar.cc/100?u=1" alt=""><img src="https://i.pravatar.cc/100?u=2" alt=""><img src="https://i.pravatar.cc/100?u=3" alt=""></div><span class="user-count">50K+ users</span></div></span><br>technology —<br>it's evolution`,
-            heroDesc: 'Create next-gen AI avatars for your virtual world — express, explore, and own your identity.',
-            joinPortal: 'Join Portal',
+            heroTitle: `Smart<br>learning <span><div class="user-tag"><div class="user-avatars"><img src="https://i.pravatar.cc/100?u=1" alt=""><img src="https://i.pravatar.cc/100?u=2" alt=""><img src="https://i.pravatar.cc/100?u=3" alt=""></div><span class="user-count">50K+ students</span></div></span><br>with modern<br>AI technology`,
+            heroDesc: 'Smart learning platform with 24/7 AI support, helping you achieve your learning goals faster and more efficiently.',
+            joinPortal: 'Join Now',
             
             // Stats hero
-            stat1Label: 'Rare NFTs',
-            stat2Label: 'Products',
-            stat3Label: 'NFT Artist',
+            stat1Label: 'Courses',
+            stat2Label: 'Students',
+            stat3Label: 'Satisfaction',
             
             // Feature cards
-            card1Title: 'Create',
-            card1Desc: 'Generate your AI avatar',
-            card2Title: 'Style',
-            card2Desc: 'Customize with your vibe',
-            card3Title: 'Mint',
-            card3Desc: 'Secure it on-chain',
+            card1Title: 'Schedule',
+            card1Desc: 'Manage time effectively',
+            card2Title: 'Learning',
+            card2Desc: 'Quality diverse courses',
+            card3Title: 'Research',
+            card3Desc: 'Rich resources',
             
             // Features Section
             featuresTag: '✨ Features',
@@ -850,7 +952,7 @@
             showcase3Btn: 'Try AI Assistant',
             
             // Team Section
-            teamTag: '🤝 Collaboration',
+            teamTag: '👥 Collaboration',
             teamTitle: 'Work together,<br><span>achieve more</span>',
             teamDesc: 'Powerful collaboration tools for group projects and team assignments.',
             showcase4Title: 'Seamless<br><span>teamwork</span>',
@@ -864,25 +966,27 @@
             showcase5List: ['Visual progress tracking', 'Milestone celebrations', 'Achievement badges', 'Weekly reports'],
             showcase5Btn: 'Set Your Goals',
             
-            // Pricing
-            pricingTag: '💎 Pricing',
-            pricingTitle: 'Simple, transparent<br><span>pricing</span>',
-            pricingDesc: 'Choose the plan that fits your learning journey.',
-            starterTitle: 'Starter',
-            starterDesc: 'Perfect for beginners',
-            starterPrice: 'Free',
-            starterFeatures: ['5 courses access', 'Basic AI assistant', 'Schedule manager', 'Community support'],
-            starterBtn: 'Get Started',
-            proTitle: 'Pro',
-            proDesc: 'Most popular choice',
-            proPrice: '$19',
-            proFeatures: ['Unlimited courses', 'Advanced AI tutor', 'Team collaboration', 'Priority support', 'Analytics dashboard'],
-            proBtn: 'Start Pro',
-            enterpriseTitle: 'Enterprise',
-            enterpriseDesc: 'For institutions',
-            enterprisePrice: 'Custom',
-            enterpriseFeatures: ['Everything in Pro', 'Custom branding', 'Admin dashboard', 'API access', 'Dedicated support'],
-            enterpriseBtn: 'Contact Sales',
+            // Registration Form
+            registerTag: '📝 Registration',
+            registerTitle: 'Register for<br><span>free trial</span>',
+            registerDesc: 'Sign up now to experience modern learning platform.',
+            registerInfoTitle: 'Why should you register?',
+            registerBenefits: ['Access to 100+ quality courses from top instructors', 'Personalized AI learning assistant 24/7', 'Connect and study with global community', 'Track progress and achieve learning goals'],
+            registerStats: ['50K+ Students', '98% Satisfied', '24/7 Support'],
+            registerFormTitle: 'Register Now',
+            registerNameLabel: 'Full Name',
+            registerNamePlaceholder: 'Enter your full name',
+            registerPhoneLabel: 'Phone Number',
+            registerPhonePlaceholder: 'Enter phone number',
+            registerEmailLabel: 'Email Address',
+            registerEmailPlaceholder: 'Enter your email',
+            registerCourseLabel: 'Interested Course',
+            registerCourseOptions: ['Select a course', 'Programming', 'Data Science', 'Design', 'Foreign Language', 'Other'],
+            registerMessageLabel: 'Message (Optional)',
+            registerMessagePlaceholder: 'Share your learning goals...',
+            registerAgree: 'I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>',
+            registerBtn: 'Register Now',
+            registerNote: 'Your information is completely secure',
             
             // CTA Section
             ctaTitle: 'Ready to start your<br><span>learning journey?</span>',
@@ -899,7 +1003,7 @@
             footerCompany: 'Company',
             footerSupport: 'Support',
             footerFeatures: 'Features',
-            footerPricing: 'Pricing',
+            footerRegister: 'Register',
             footerIntegrations: 'Integrations',
             footerAPI: 'API',
             footerAbout: 'About',
@@ -916,27 +1020,27 @@
             // Header
             navHome: 'Trang chủ',
             navFeatures: 'Tính năng',
-            navPricing: 'Bảng giá',
+            navRegister: 'Đăng ký',
             navContact: 'Liên hệ',
-            headerBtn: 'Bắt đầu →',
+            headerBtn: 'Đăng ký →',
             
             // Hero
-            heroTitle: `Đây không chỉ<br>là <span><div class="user-tag"><div class="user-avatars"><img src="https://i.pravatar.cc/100?u=1" alt=""><img src="https://i.pravatar.cc/100?u=2" alt=""><img src="https://i.pravatar.cc/100?u=3" alt=""></div><span class="user-count">50K+ người dùng</span></div></span><br>công nghệ —<br>mà là tiến hóa`,
-            heroDesc: 'Tạo avatar AI thế hệ mới cho thế giới ảo của bạn — thể hiện, khám phá và sở hữu bản sắc riêng.',
-            joinPortal: 'Tham gia',
+            heroTitle: `Học tập<br>thông minh <span><div class="user-tag"><div class="user-avatars"><img src="https://i.pravatar.cc/100?u=1" alt=""><img src="https://i.pravatar.cc/100?u=2" alt=""><img src="https://i.pravatar.cc/100?u=3" alt=""></div><span class="user-count">50K+ học viên</span></div></span><br>cùng công nghệ<br>AI hiện đại`,
+            heroDesc: 'Nền tảng học tập thông minh với AI hỗ trợ 24/7, giúp bạn đạt mục tiêu học tập nhanh và hiệu quả hơn.',
+            joinPortal: 'Tham gia ngay',
             
             // Stats hero
-            stat1Label: 'NFT Hiếm',
-            stat2Label: 'Sản phẩm',
-            stat3Label: 'Nghệ sĩ NFT',
+            stat1Label: 'Khóa học',
+            stat2Label: 'Học viên',
+            stat3Label: 'Hài lòng',
             
             // Feature cards
-            card1Title: 'Tạo mới',
-            card1Desc: 'Tạo avatar AI của bạn',
-            card2Title: 'Phong cách',
-            card2Desc: 'Tùy chỉnh theo ý thích',
-            card3Title: 'Đúc NFT',
-            card3Desc: 'Bảo mật trên blockchain',
+            card1Title: 'Lịch học',
+            card1Desc: 'Quản lý thời gian hiệu quả',
+            card2Title: 'Học tập',
+            card2Desc: 'Khóa học đa dạng chất lượng',
+            card3Title: 'Nghiên cứu',
+            card3Desc: 'Tài liệu phong phú',
             
             // Features Section
             featuresTag: '✨ Tính năng',
@@ -981,7 +1085,7 @@
             showcase3Btn: 'Thử trợ lý AI',
             
             // Team Section
-            teamTag: '🤝 Cộng tác',
+            teamTag: '👥 Cộng tác',
             teamTitle: 'Làm việc cùng nhau,<br><span>đạt được nhiều hơn</span>',
             teamDesc: 'Công cụ cộng tác mạnh mẽ cho dự án nhóm và bài tập tập thể.',
             showcase4Title: 'Làm việc nhóm<br><span>liền mạch</span>',
@@ -995,25 +1099,27 @@
             showcase5List: ['Theo dõi tiến độ trực quan', 'Ăn mừng cột mốc', 'Huy hiệu thành tích', 'Báo cáo hàng tuần'],
             showcase5Btn: 'Đặt mục tiêu',
             
-            // Pricing
-            pricingTag: '💎 Bảng giá',
-            pricingTitle: 'Đơn giản, minh bạch<br><span>về giá cả</span>',
-            pricingDesc: 'Chọn gói phù hợp với hành trình học tập của bạn.',
-            starterTitle: 'Khởi đầu',
-            starterDesc: 'Hoàn hảo cho người mới',
-            starterPrice: 'Miễn phí',
-            starterFeatures: ['Truy cập 5 khóa học', 'Trợ lý AI cơ bản', 'Quản lý lịch', 'Hỗ trợ cộng đồng'],
-            starterBtn: 'Bắt đầu',
-            proTitle: 'Chuyên nghiệp',
-            proDesc: 'Lựa chọn phổ biến nhất',
-            proPrice: '450K',
-            proFeatures: ['Khóa học không giới hạn', 'Gia sư AI nâng cao', 'Cộng tác nhóm', 'Hỗ trợ ưu tiên', 'Bảng phân tích'],
-            proBtn: 'Dùng Pro',
-            enterpriseTitle: 'Doanh nghiệp',
-            enterpriseDesc: 'Dành cho tổ chức',
-            enterprisePrice: 'Tùy chỉnh',
-            enterpriseFeatures: ['Tất cả trong Pro', 'Thương hiệu tùy chỉnh', 'Bảng điều khiển admin', 'Truy cập API', 'Hỗ trợ riêng'],
-            enterpriseBtn: 'Liên hệ',
+            // Registration Form
+            registerTag: '📝 Đăng ký',
+            registerTitle: 'Đăng ký<br><span>dùng thử miễn phí</span>',
+            registerDesc: 'Đăng ký ngay để trải nghiệm nền tảng học tập hiện đại.',
+            registerInfoTitle: 'Tại sao bạn nên đăng ký?',
+            registerBenefits: ['Truy cập 100+ khóa học chất lượng từ giảng viên hàng đầu', 'Trợ lý AI học tập cá nhân hóa 24/7', 'Kết nối và học tập cùng cộng đồng toàn cầu', 'Theo dõi tiến độ và đạt mục tiêu học tập'],
+            registerStats: ['50K+ Học viên', '98% Hài lòng', '24/7 Hỗ trợ'],
+            registerFormTitle: 'Đăng ký ngay',
+            registerNameLabel: 'Họ và tên',
+            registerNamePlaceholder: 'Nhập họ và tên của bạn',
+            registerPhoneLabel: 'Số điện thoại',
+            registerPhonePlaceholder: 'Nhập số điện thoại',
+            registerEmailLabel: 'Email',
+            registerEmailPlaceholder: 'Nhập địa chỉ email',
+            registerCourseLabel: 'Khóa học quan tâm',
+            registerCourseOptions: ['Chọn khóa học', 'Lập trình', 'Khoa học dữ liệu', 'Thiết kế', 'Ngoại ngữ', 'Khác'],
+            registerMessageLabel: 'Lời nhắn (Tùy chọn)',
+            registerMessagePlaceholder: 'Chia sẻ mục tiêu học tập của bạn...',
+            registerAgree: 'Tôi đồng ý với <a href="#">Điều khoản</a> và <a href="#">Chính sách bảo mật</a>',
+            registerBtn: 'Đăng ký ngay',
+            registerNote: 'Thông tin của bạn được bảo mật tuyệt đối',
             
             // CTA Section
             ctaTitle: 'Sẵn sàng bắt đầu<br><span>hành trình học tập?</span>',
@@ -1030,7 +1136,7 @@
             footerCompany: 'Công ty',
             footerSupport: 'Hỗ trợ',
             footerFeatures: 'Tính năng',
-            footerPricing: 'Bảng giá',
+            footerRegister: 'Đăng ký',
             footerIntegrations: 'Tích hợp',
             footerAPI: 'API',
             footerAbout: 'Giới thiệu',
@@ -1046,21 +1152,66 @@
     };
     
     function updateLanguage(lang) {
-        const t = translations[lang];
+        try {
+            const t = translations[lang];
+            if (!t) {
+                console.error('Translation not found for language:', lang);
+                return;
+            }
+            const langAttr = lang === 'VI' ? 'vi' : 'en';
+            
+            // Update all elements with data-lang attributes
+            document.querySelectorAll('[data-lang-' + langAttr + ']').forEach(el => {
+                const text = el.getAttribute('data-lang-' + langAttr);
+            if (el.tagName === 'A' && el.querySelector('i')) {
+                // Keep icons for links
+                const icon = el.querySelector('i').outerHTML;
+                if (el.classList.contains('dropdown-toggle')) {
+                    el.innerHTML = text + ' ' + icon;
+                } else {
+                    el.textContent = text;
+                }
+            } else if (el.tagName === 'SPAN' || el.tagName === 'A') {
+                el.textContent = text;
+            }
+        });
         
-        // Header
-        const navLinks = document.querySelectorAll('.header-nav a');
-        if (navLinks.length >= 4) {
-            navLinks[0].textContent = t.navHome;
-            navLinks[1].textContent = t.navFeatures;
-            navLinks[2].textContent = t.navPricing;
-            navLinks[3].textContent = t.navContact;
+        // Header nav - update dropdown toggles properly
+        const homeLink = document.querySelector('.header-nav > a[href="#home"]');
+        const featuresToggle = document.querySelector('.header-nav .nav-dropdown .dropdown-toggle');
+        const registerLink = document.querySelector('.header-nav > a[href="#register"]');
+        const contactLink = document.querySelector('.header-nav > a[href="#contact"]');
+        
+        if (homeLink) homeLink.textContent = t.navHome;
+        if (featuresToggle) featuresToggle.innerHTML = t.navFeatures + ' <i class="fa-solid fa-chevron-down"></i>';
+        if (registerLink) registerLink.textContent = t.navRegister;
+        if (contactLink) contactLink.textContent = t.navContact;
+        
+        // Header button
+        const headerBtn = document.querySelector('.header-btn');
+        if (headerBtn) headerBtn.textContent = t.headerBtn;
+        
+        // Mobile nav
+        const mobileHome = document.querySelector('.mobile-nav > a[href="#home"]');
+        const mobileRegister = document.querySelector('.mobile-nav > a[href="#register"]');
+        const mobileContact = document.querySelector('.mobile-nav > a[href="#contact"]');
+        const mobileCta = document.querySelector('.mobile-cta');
+        if (mobileHome) mobileHome.textContent = t.navHome;
+        if (mobileRegister) mobileRegister.textContent = t.navRegister;
+        if (mobileContact) mobileContact.textContent = t.navContact;
+        if (mobileCta) mobileCta.textContent = t.headerBtn;
+        
+        // Mobile dropdown toggles
+        const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle span');
+        if (mobileDropdownToggles.length >= 1) {
+            mobileDropdownToggles[0].textContent = t.navFeatures;
         }
-        document.querySelector('.header-btn').textContent = t.headerBtn;
         
         // Hero
-        document.querySelector('.hero-title').innerHTML = t.heroTitle;
-        document.querySelector('.hero-desc').textContent = t.heroDesc;
+        const heroTitle = document.querySelector('.hero-title');
+        const heroDesc = document.querySelector('.hero-desc');
+        if (heroTitle) heroTitle.innerHTML = t.heroTitle;
+        if (heroDesc) heroDesc.textContent = t.heroDesc;
         
         // Join Portal
         const joinPortal = document.querySelector('.join-portal');
@@ -1190,43 +1341,71 @@
             if (btn5) btn5.innerHTML = t.showcase5Btn + ' <i class="fa-solid fa-bullseye"></i>';
         }
         
-        // Pricing Section (index 2)
-        if (sectionTags[2]) sectionTags[2].textContent = t.pricingTag;
-        if (sectionTitles[2]) sectionTitles[2].innerHTML = t.pricingTitle;
-        if (sectionDescs[2]) sectionDescs[2].textContent = t.pricingDesc;
+        // Registration Section (index 2)
+        if (sectionTags[2]) sectionTags[2].textContent = t.registerTag;
+        if (sectionTitles[2]) sectionTitles[2].innerHTML = t.registerTitle;
+        if (sectionDescs[2]) sectionDescs[2].textContent = t.registerDesc;
         
-        // Pricing cards
-        const pricingCards = document.querySelectorAll('.pricing-card');
-        if (pricingCards.length >= 3) {
-            // Starter
-            pricingCards[0].querySelector('h3').textContent = t.starterTitle;
-            pricingCards[0].querySelector('p').textContent = t.starterDesc;
-            pricingCards[0].querySelector('.price').innerHTML = t.starterPrice + '<span></span>';
-            const starterLi = pricingCards[0].querySelectorAll('ul li');
-            t.starterFeatures.forEach((f, i) => {
-                if (starterLi[i]) starterLi[i].innerHTML = '<i class="fa-solid fa-check"></i> ' + f;
-            });
-            pricingCards[0].querySelector('.cta-btn').textContent = t.starterBtn;
+        // Register form content
+        const registerInfo = document.querySelector('.register-info');
+        if (registerInfo) {
+            const infoTitle = registerInfo.querySelector('h3');
+            if (infoTitle) infoTitle.textContent = t.registerInfoTitle;
             
-            // Pro
-            pricingCards[1].querySelector('h3').textContent = t.proTitle;
-            pricingCards[1].querySelector('p').textContent = t.proDesc;
-            pricingCards[1].querySelector('.price').innerHTML = t.proPrice + '<span>/tháng</span>';
-            const proLi = pricingCards[1].querySelectorAll('ul li');
-            t.proFeatures.forEach((f, i) => {
-                if (proLi[i]) proLi[i].innerHTML = '<i class="fa-solid fa-check"></i> ' + f;
+            const benefits = registerInfo.querySelectorAll('.register-benefits li');
+            t.registerBenefits.forEach((benefit, i) => {
+                if (benefits[i]) benefits[i].innerHTML = '<i class="fa-solid fa-check-circle"></i> ' + benefit;
             });
-            pricingCards[1].querySelector('.cta-btn').textContent = t.proBtn;
             
-            // Enterprise
-            pricingCards[2].querySelector('h3').textContent = t.enterpriseTitle;
-            pricingCards[2].querySelector('p').textContent = t.enterpriseDesc;
-            pricingCards[2].querySelector('.price').innerHTML = t.enterprisePrice + '<span></span>';
-            const entLi = pricingCards[2].querySelectorAll('ul li');
-            t.enterpriseFeatures.forEach((f, i) => {
-                if (entLi[i]) entLi[i].innerHTML = '<i class="fa-solid fa-check"></i> ' + f;
-            });
-            pricingCards[2].querySelector('.cta-btn').textContent = t.enterpriseBtn;
+            const stats = registerInfo.querySelectorAll('.register-stat');
+            if (stats.length >= 3) {
+                stats[0].querySelector('.stat-number').textContent = '50K+';
+                stats[0].querySelector('.stat-text').textContent = t.registerStats[0].replace('10K+ ', '').replace('50K+ ', '');
+                stats[1].querySelector('.stat-number').textContent = '98%';
+                stats[1].querySelector('.stat-text').textContent = t.registerStats[1].replace('98% ', '');
+                stats[2].querySelector('.stat-number').textContent = '24/7';
+                stats[2].querySelector('.stat-text').textContent = t.registerStats[3].replace('24/7 ', '');
+            }
+        }
+        
+        const registerForm = document.querySelector('.register-form');
+        if (registerForm) {
+            const formTitle = registerForm.querySelector('h3');
+            if (formTitle) formTitle.textContent = t.registerFormTitle;
+            
+            const labels = registerForm.querySelectorAll('.form-group label');
+            const inputs = registerForm.querySelectorAll('.form-group input');
+            const textareas = registerForm.querySelectorAll('.form-group textarea');
+            const selects = registerForm.querySelectorAll('.form-group select');
+            
+            if (labels[0]) labels[0].innerHTML = '<i class="fa-solid fa-user"></i> ' + t.registerNameLabel;
+            if (inputs[0]) inputs[0].placeholder = t.registerNamePlaceholder;
+            
+            if (labels[1]) labels[1].innerHTML = '<i class="fa-solid fa-phone"></i> ' + t.registerPhoneLabel;
+            if (inputs[1]) inputs[1].placeholder = t.registerPhonePlaceholder;
+            
+            if (labels[2]) labels[2].innerHTML = '<i class="fa-solid fa-envelope"></i> ' + t.registerEmailLabel;
+            if (inputs[2]) inputs[2].placeholder = t.registerEmailPlaceholder;
+            
+            if (labels[3]) labels[3].innerHTML = '<i class="fa-solid fa-book"></i> ' + t.registerCourseLabel;
+            if (selects[0]) {
+                const options = selects[0].querySelectorAll('option');
+                t.registerCourseOptions.forEach((opt, i) => {
+                    if (options[i]) options[i].textContent = opt;
+                });
+            }
+            
+            if (labels[4]) labels[4].innerHTML = '<i class="fa-solid fa-message"></i> ' + t.registerMessageLabel;
+            if (textareas[0]) textareas[0].placeholder = t.registerMessagePlaceholder;
+            
+            const checkbox = registerForm.querySelector('.form-checkbox label');
+            if (checkbox) checkbox.innerHTML = t.registerAgree;
+            
+            const submitBtn = registerForm.querySelector('.submit-btn');
+            if (submitBtn) submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ' + t.registerBtn;
+            
+            const formNote = registerForm.querySelector('.form-note');
+            if (formNote) formNote.innerHTML = '<i class="fa-solid fa-shield-halved"></i> ' + t.registerNote;
         }
         
         // CTA Section (index 3)
@@ -1263,7 +1442,7 @@
         if (footerLinkGroups[0]) {
             const links = footerLinkGroups[0].querySelectorAll('a');
             if (links[0]) links[0].textContent = t.footerFeatures;
-            if (links[1]) links[1].textContent = t.footerPricing;
+            if (links[1]) links[1].textContent = t.footerRegister;
             if (links[2]) links[2].textContent = t.footerIntegrations;
             if (links[3]) links[3].textContent = t.footerAPI;
         }
@@ -1284,11 +1463,19 @@
         
         const footerBottom = document.querySelector('.footer-bottom p');
         if (footerBottom) footerBottom.textContent = t.footerCopyright;
+        
+        } catch (error) {
+            console.error('Error updating language:', error);
+        }
     }
+    
+    // Initialize with Vietnamese language on page load
+    updateLanguage(currentLang);
     
     langToggle.addEventListener('click', function() {
         currentLang = currentLang === 'EN' ? 'VI' : 'EN';
-        this.textContent = currentLang;
+        // Button shows the OTHER language (the one you can switch to)
+        this.textContent = currentLang === 'VI' ? 'EN' : 'VI';
         updateLanguage(currentLang);
     });
 
@@ -1313,7 +1500,7 @@
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileCloseBtn = document.getElementById('mobileCloseBtn');
     const mobileMenu = document.getElementById('mobileMenu');
-    // mobileNavLinks đã được khai báo ở trên
+    // mobileNavLinks da duoc khai bao o tren
 
     function openMobileMenu() {
         mobileMenu.classList.add('active');
@@ -1323,12 +1510,33 @@
     function closeMobileMenu() {
         mobileMenu.classList.remove('active');
         document.body.style.overflow = '';
+        // Close all mobile dropdowns
+        document.querySelectorAll('.mobile-dropdown').forEach(d => d.classList.remove('active'));
     }
 
     mobileMenuBtn.addEventListener('click', openMobileMenu);
     mobileCloseBtn.addEventListener('click', closeMobileMenu);
 
-    // Close menu when clicking a link
+    // Mobile Dropdown Toggle
+    document.querySelectorAll('.mobile-dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            const dropdown = this.parentElement;
+            // Close other dropdowns
+            document.querySelectorAll('.mobile-dropdown').forEach(d => {
+                if (d !== dropdown) d.classList.remove('active');
+            });
+            dropdown.classList.toggle('active');
+        });
+    });
+
+    // Close mobile menu when clicking a dropdown link
+    document.querySelectorAll('.mobile-dropdown-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            closeMobileMenu();
+        });
+    });
+
+    // Close menu when clicking a direct link
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', () => {
             closeMobileMenu();
@@ -1387,15 +1595,15 @@
         },
         {
             keywords: ['giá', 'bao nhiêu', 'chi phí', 'pricing', 'price', 'gói'],
-            answer: '💰 Chúng tôi có 3 gói:\n\n• **Starter (Miễn phí)**: 5 khóa học, AI cơ bản\n• **Pro ($19/tháng)**: Không giới hạn khóa học, AI nâng cao\n• **Enterprise**: Tùy chỉnh cho tổ chức, liên hệ để báo giá'
+            answer: '💎 Chúng tôi có 3 gói:\n\n• **Starter (Miễn phí)**: 5 khóa học, AI cơ bản\n• **Pro (450K/tháng)**: Không giới hạn khóa học, AI nâng cao\n• **Enterprise**: Tùy chỉnh cho tổ chức, liên hệ để báo giá'
         },
         {
             keywords: ['tính năng', 'features', 'chức năng', 'có gì'],
-            answer: '🚀 MetaMuse có nhiều tính năng:\n\n• 📚 Smart Learning - Học tập thông minh với AI\n• 📅 Schedule Manager - Quản lý lịch học\n• 🎯 Goal Tracking - Theo dõi mục tiêu\n• 💬 AI Assistant - Trợ lý AI 24/7\n• 👥 Team Projects - Làm việc nhóm\n• 📊 Analytics - Phân tích tiến độ'
+            answer: '✨ MetaMuse có nhiều tính năng:\n\n• 🧠 Smart Learning - Học tập thông minh với AI\n• 📅 Schedule Manager - Quản lý lịch học\n• 🎯 Goal Tracking - Theo dõi mục tiêu\n• 🤖 AI Assistant - Trợ lý AI 24/7\n• 👥 Team Projects - Làm việc nhóm\n• 📊 Analytics - Phân tích tiến độ'
         },
         {
             keywords: ['liên hệ', 'contact', 'hỗ trợ', 'support', 'email'],
-            answer: '📧 Bạn có thể liên hệ với chúng tôi qua:\n\n• Email: support@metamuse.com\n• Hotline: 1900-xxxx\n• Facebook: /metamuse\n• Hoặc điền form tại mục Contact trên website!'
+            answer: '📞 Bạn có thể liên hệ với chúng tôi qua:\n\n• Email: support@metamuse.com\n• Hotline: 1900-xxxx\n• Facebook: /metamuse\n• Hoặc điền form tại mục Contact trên website!'
         },
         {
             keywords: ['cảm ơn', 'thanks', 'thank you', 'ok', 'được rồi'],
@@ -1407,7 +1615,7 @@
         },
         {
             keywords: ['đăng ký', 'register', 'tạo tài khoản', 'sign up'],
-            answer: '📝 Để đăng ký tài khoản:\n\n1. Nhấn nút "Get Started" trên website\n2. Điền thông tin email và mật khẩu\n3. Xác nhận email\n4. Bắt đầu học ngay!\n\nGói Starter hoàn toàn miễn phí!'
+            answer: '📝 Để đăng ký tài khoản:\n\n1. Nhấn nút "Bắt đầu" trên website\n2. Điền thông tin email và mật khẩu\n3. Xác nhận email\n4. Bắt đầu học ngay!\n\nGói Starter hoàn toàn miễn phí!'
         }
     ];
 
@@ -1492,7 +1700,7 @@
         }
         
         // Default response if no match
-        return '🤔 Xin lỗi, tôi chưa hiểu câu hỏi của bạn. Bạn có thể hỏi tôi về:\n\n• MetaMuse là gì?\n• Giá cả các gói?\n• Các tính năng chính?\n• Cách liên hệ hỗ trợ?\n\n💡 Tip: Admin có thể dạy tôi thêm kiến thức mới bằng nút 🎓!';
+        return '🤔 Xin lỗi, tôi chưa hiểu câu hỏi của bạn. Bạn có thể hỏi tôi về:\n\n• MetaMuse là gì?\n• Giá cả các gói?\n• Các tính năng chính?\n• Cách liên hệ hỗ trợ?\n\n💡 Hãy thử hỏi lại với từ khóa đơn giản hơn nhé!';
     }
 
     // Send message
@@ -1681,6 +1889,7 @@
     document.querySelectorAll('.cta-btn:not(.cta-btn-outline)').forEach(btn => {
         btn.classList.add('glow-animate');
     });
+}); // End DOMContentLoaded
 </script>
 </body>
 </html>
