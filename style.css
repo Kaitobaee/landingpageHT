@@ -1008,6 +1008,28 @@
             align-items: center;
         }
 
+        /* New Showcase Flex Layout */
+        .showcase-flex {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .showcase-flex .showcase-image {
+            flex: 1;
+            max-width: 50%;
+        }
+
+        .showcase-flex .showcase-content {
+            flex: 1;
+            max-width: 50%;
+        }
+
+        .showcase-flex.reverse {
+            flex-direction: row-reverse;
+        }
+
         .showcase-content h2 {
             font-size: 48px;
             font-weight: 300;
@@ -1059,6 +1081,50 @@
             max-width: 500px;
             filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5));
             animation: float 6s ease-in-out infinite;
+        }
+
+        /* Showcase 3D Model */
+        .showcase-3d {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .showcase-3d model-viewer {
+            width: 100%;
+            max-width: 600px;
+            height: 480px;
+            cursor: grab;
+            border-radius: 20px;
+            filter: drop-shadow(0 30px 60px rgba(0,0,0,0.3));
+        }
+
+        .showcase-3d model-viewer:active {
+            cursor: grabbing;
+        }
+
+        .showcase-3d::before {
+            content: '';
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { 
+                opacity: 0.5; 
+                transform: translate(-50%, -50%) scale(1); 
+            }
+            50% { 
+                opacity: 1; 
+                transform: translate(-50%, -50%) scale(1.1); 
+            }
         }
 
         @keyframes float {
@@ -2087,6 +2153,10 @@
                 gap: 40px;
             }
 
+            .showcase-flex {
+                gap: 40px;
+            }
+
             .showcase-content h2 {
                 font-size: 36px;
             }
@@ -2303,6 +2373,25 @@
                 gap: 32px;
             }
 
+            /* Showcase Flex Mobile */
+            .showcase-flex {
+                flex-direction: column;
+                gap: 32px;
+            }
+
+            .showcase-flex .showcase-image,
+            .showcase-flex .showcase-content {
+                max-width: 100%;
+            }
+
+            .showcase-flex.reverse {
+                flex-direction: column;
+            }
+
+            .showcase-flex .showcase-image {
+                order: -1;
+            }
+
             .showcase-image {
                 order: -1;
             }
@@ -2311,6 +2400,17 @@
                 max-width: 300px;
                 margin: 0 auto;
                 display: block;
+            }
+
+            /* Showcase 3D Mobile */
+            .showcase-3d model-viewer {
+                max-width: 100%;
+                height: 360px;
+            }
+
+            .showcase-3d::before {
+                width: 300px;
+                height: 300px;
             }
 
             .showcase-content h2 {
@@ -2670,29 +2770,138 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
+        /* 3D Robot Wrapper */
+        .robot-3d-wrapper {
+            position: relative;
+            width: 216px;
+            height: 216px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .robot-3d-wrapper model-viewer {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .robot-glow {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 144px;
+            height: 36px;
+            background: radial-gradient(ellipse, rgba(255, 45, 149, 0.5), transparent 70%);
+            filter: blur(8px);
+            animation: robotGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes robotGlow {
+            0%, 100% {
+                opacity: 0.5;
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.2);
+            }
+        }
+
+        /* Robot Floating Animation */
+        @keyframes robotFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
         .chatbot-toggle {
-            width: 60px;
-            height: 60px;
+            width: 216px;
+            height: 216px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            background: transparent;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 8px 32px rgba(255, 45, 149, 0.4);
             transition: all 0.3s ease;
             font-size: 24px;
             position: relative;
+            animation: robotFloat 3s ease-in-out infinite;
         }
 
         .chatbot-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 40px rgba(255, 45, 149, 0.5);
+            transform: scale(1.05);
+        }
+
+        .chatbot-toggle:hover .robot-glow {
+            opacity: 1;
+            filter: blur(12px);
+            background: radial-gradient(ellipse, rgba(255, 45, 149, 0.8), transparent 70%);
         }
 
         .chatbot-toggle.active {
-            transform: rotate(90deg);
+            animation: robotFloat 3s ease-in-out infinite;
+        }
+
+        /* Robot Speech Bubble */
+        .robot-speech-bubble {
+            position: absolute;
+            top: -10px;
+            right: 200px;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            color: white;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 4px 20px rgba(255, 45, 149, 0.4);
+            animation: speechBubbleIn 0.4s ease-out;
+            z-index: 10;
+        }
+
+        .robot-speech-bubble::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 10px solid var(--accent-purple);
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+
+        .robot-speech-bubble.fade-out {
+            animation: speechBubbleOut 0.3s ease-in forwards;
+        }
+
+        @keyframes speechBubbleIn {
+            0% {
+                opacity: 0;
+                transform: translateX(20px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        @keyframes speechBubbleOut {
+            0% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(20px) scale(0.8);
+            }
         }
 
         .chat-badge {
@@ -2723,8 +2932,10 @@
 
         .chatbot-window {
             position: absolute;
-            bottom: 80px;
-            right: 0;
+            bottom: 100%;
+            right: auto;
+            left: -200px;
+            margin-bottom: 20px;
             width: 380px;
             height: 520px;
             background: rgba(15, 15, 25, 0.98);
@@ -3062,17 +3273,43 @@
             }
 
             .chatbot-toggle {
-                width: 54px;
-                height: 54px;
+                width: 120px;
+                height: 120px;
                 font-size: 20px;
+            }
+            
+            .robot-3d-wrapper {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .robot-3d-wrapper model-viewer {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .robot-glow {
+                width: 90px;
+                height: 22px;
+            }
+            
+            .robot-speech-bubble {
+                right: 110px;
+                top: -5px;
+                font-size: 12px;
+                padding: 8px 12px;
             }
 
             .chatbot-window {
+                position: fixed;
                 width: calc(100vw - 32px);
-                height: calc(100vh - 120px);
-                max-height: 500px;
-                bottom: 70px;
-                right: -8px;
+                height: calc(100vh - 180px);
+                max-height: 450px;
+                bottom: auto;
+                top: 16px;
+                left: 16px;
+                right: auto;
+                margin-bottom: 0;
             }
 
             .chatbot-suggestions {
