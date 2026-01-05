@@ -2090,6 +2090,9 @@
             left: 0;
             width: 100%;
             height: 100vh;
+            max-height: 100vh;
+            overflow-y: auto;
+            overscroll-behavior: contain;
             background: rgba(5, 5, 10, 0.98);
             backdrop-filter: blur(20px);
             z-index: 2000;
