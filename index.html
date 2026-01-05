@@ -10,10 +10,13 @@
 
 </head>
 <body>
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- ========== STICKY HEADER ========== -->
-    <header class="sticky-header" id="stickyHeader">
+    <header class="sticky-header" id="stickyHeader" role="banner" aria-label="Main navigation">
         <a href="#home" class="header-logo">MetaMuse</a>
-        <nav class="header-nav">
+        <nav class="header-nav" aria-label="Primary navigation">
             <a href="#home" class="active" data-lang-en="Home" data-lang-vi="Trang chủ">Home</a>
             <div class="nav-dropdown">
                 <a href="#features" class="dropdown-toggle" data-lang-en="Features" data-lang-vi="Tính năng">Features <i class="fa-solid fa-chevron-down"></i></a>
@@ -67,13 +70,13 @@
     </header>
 
     <!-- Sao bang background (chi hien o Home) -->
-    <div class="shooting-stars" id="shootingStars"></div>
+    <div class="shooting-stars" id="shootingStars" aria-hidden="true"></div>
 
     <!-- Tuyet roi background (hien o cac section khac) -->
-    <div class="snow-container" id="snowContainer"></div>
+    <div class="snow-container" id="snowContainer" aria-hidden="true"></div>
 
     <div class="main-card" id="home">
-        <div class="left-side">
+        <div class="left-side" id="main-content">
             
 
             <div class="hero-section">
@@ -88,8 +91,7 @@
                         </div>
                         <span class="user-count">50K+ học viên</span>
                     </div></span><br>
-                    cùng công nghệ<br>
-                    AI hiện đại
+                    cùng <span id="typing-text">công nghệ<br>AI hiện đại</span>
                 </h1>
                 
                 <p class="hero-desc">
@@ -255,7 +257,7 @@
             <div class="showcase-image showcase-3d">
                 <model-viewer 
                     class="showcase-model"
-                    src="robot/laptop user 3d model.glb" 
+                    data-src="robot/laptop user 3d model.glb" 
                     alt="Online Learning 3D"
                     camera-controls
                     disable-zoom
@@ -322,7 +324,7 @@
             <div class="showcase-image showcase-3d">
                 <model-viewer 
                     class="showcase-model"
-                    src="robot/đồng hồ.glb" 
+                    data-src="robot/đồng hồ.glb" 
                     alt="Time Management 3D"
                     camera-controls
                     disable-zoom
@@ -342,7 +344,7 @@
             <div class="showcase-image showcase-3d">
                 <model-viewer 
                     class="showcase-model"
-                    src="robot/boxchat.glb" 
+                    data-src="robot/boxchat.glb" 
                     alt="AI Chatbot 3D"
                     camera-controls
                     disable-zoom
@@ -390,7 +392,7 @@
             <div class="showcase-image showcase-3d">
                 <model-viewer 
                     class="showcase-model"
-                    src="robot/họp.glb" 
+                    data-src="robot/họp.glb" 
                     alt="Team Meeting 3D"
                     camera-controls
                     disable-zoom
@@ -629,7 +631,204 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Tao sao bang - MAU TIM HUYEN AO + TO + NHIEU
+    // ========== CURSOR GLOW (Mouse Follower) ==========
+    // Only on desktop
+    if (window.innerWidth > 1024) {
+        const cursorGlow = document.createElement('div');
+        cursorGlow.className = 'cursor-glow';
+        document.body.appendChild(cursorGlow);
+        
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.setProperty('--x', e.clientX + 'px');
+            cursorGlow.style.setProperty('--y', e.clientY + 'px');
+        });
+    }
+
+    // ========== PARALLAX EFFECT FOR HERO IMAGE ==========
+    const heroImage = document.getElementById('heroImage');
+    if (heroImage) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxSpeed = 0.3;
+            
+            if (scrolled < 800) {
+                heroImage.style.transform = `translateY(calc(-50% + ${scrolled * parallaxSpeed}px))`;
+            }
+        });
+    }
+
+    // ========== TYPING EFFECT FOR HERO TITLE ==========
+    const typingElement = document.getElementById('typing-text');
+    if (typingElement) {
+        const texts = ['công nghệ<br>AI hiện đại', 'AI hiện đại<br>và thông minh', 'công nghệ<br>AI tiên tiến'];
+        let textIndex = 0;
+        let isDeleting = false;
+        let currentText = texts[textIndex];
+        let displayedText = currentText;
+        
+        function typeEffect() {
+            if (!isDeleting && displayedText === currentText) {
+                // Pause at end
+                setTimeout(() => {
+                    isDeleting = true;
+                    typeEffect();
+                }, 2000);
+                return;
+            }
+            
+            if (isDeleting && displayedText === '') {
+                // Move to next text
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                currentText = texts[textIndex];
+                setTimeout(typeEffect, 500);
+                return;
+            }
+            
+            if (isDeleting) {
+                displayedText = currentText.substring(0, displayedText.length - 1);
+            } else {
+                displayedText = currentText.substring(0, displayedText.length + 1);
+            }
+            
+            typingElement.innerHTML = displayedText + '<span class="typing-cursor">|</span>';
+            
+            const speed = isDeleting ? 50 : 100;
+            setTimeout(typeEffect, speed);
+        }
+        
+        // Start typing effect
+        setTimeout(typeEffect, 1000);
+        
+        // Add cursor animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            .typing-cursor {
+                animation: blink 1s infinite;
+            }
+            @keyframes blink {
+                0%, 50% { opacity: 1; }
+                51%, 100% { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // ========== DEBOUNCE UTILITY ==========
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // ========== LAZY LOAD FOR 3D MODELS ==========
+    const modelObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const model = entry.target;
+                const src = model.getAttribute('data-src');
+                if (src) {
+                    model.setAttribute('src', src);
+                    model.removeAttribute('data-src');
+                }
+                modelObserver.unobserve(model);
+            }
+        });
+    }, { rootMargin: '200px' });
+
+    document.querySelectorAll('model-viewer[data-src]').forEach(model => {
+        modelObserver.observe(model);
+    });
+
+    // ========== INTERSECTION OBSERVER FOR SCROLL ANIMATIONS ==========
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('animate-in');
+                }, index * 150); // Stagger delay
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe all feature boxes, showcase grids, stat boxes
+    document.querySelectorAll('.feature-box, .showcase-grid, .stat-box').forEach(el => {
+        el.classList.add('animate-target');
+        observer.observe(el);
+    });
+
+    // Add CSS for animate targets
+    const animStyle = document.createElement('style');
+    animStyle.textContent = `
+        .animate-target {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .animate-target.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    `;
+    document.head.appendChild(animStyle);
+
+    // ========== PARTICLES BACKGROUND ==========
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const x = Math.random() * window.innerWidth;
+        const size = 2 + Math.random() * 4;
+        const duration = 10 + Math.random() * 20;
+        const randomDrift = Math.random();
+        
+        particle.style.left = x + 'px';
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.animationDuration = duration + 's';
+        particle.style.setProperty('--random', randomDrift);
+        
+        document.body.appendChild(particle);
+        
+        setTimeout(() => particle.remove(), duration * 1000);
+    }
+
+    // Create particles every 500ms
+    setInterval(createParticle, 500);
+
+    // ========== KEYBOARD NAVIGATION FOR FEATURE CARDS ==========
+    document.querySelectorAll('.feature-card').forEach((card, index) => {
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `Feature ${index + 1}`);
+        
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                card.click();
+            }
+        });
+    });
+
+    // Feature boxes keyboard navigation
+    document.querySelectorAll('.feature-box').forEach((box, index) => {
+        box.setAttribute('tabindex', '0');
+        box.setAttribute('aria-label', `Feature: ${box.querySelector('h3')?.textContent || 'Feature ' + (index + 1)}`);
+    });
+
+    // Tao sao bang - OPTIMIZED: Reduce frequency
     const shootingStarsContainer = document.getElementById('shootingStars');
     const snowContainer = document.getElementById('snowContainer');
     const homeSection = document.getElementById('home');
@@ -677,8 +876,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }, duration * 1000 + 1000);
     }
 
-    // ========== TAO TUYET ROI ==========
+    // ========== TAO TUYET ROI - OPTIMIZED ==========
+    let activeSnowflakes = 0;
+    const MAX_SNOWFLAKES = 50;
+
     function createSnowflake() {
+        if (activeSnowflakes >= MAX_SNOWFLAKES) return;
+        
         const snow = document.createElement('div');
         snow.className = 'snowflake';
         
@@ -705,23 +909,27 @@ document.addEventListener('DOMContentLoaded', function() {
         snow.style.setProperty('--duration', duration + 's');
         snow.style.setProperty('--drift', drift + 'px');
         
+        activeSnowflakes++;
         snowContainer.appendChild(snow);
         
         setTimeout(() => {
-            if (snow.parentElement) snow.remove();
+            if (snow.parentElement) {
+                snow.remove();
+                activeSnowflakes--;
+            }
         }, duration * 1000);
     }
 
-    // Tao tuyet lien tuc
-    setInterval(createSnowflake, 100);
+    // Create snowflakes - REDUCED frequency: 100ms -> 200ms
+    setInterval(createSnowflake, 200);
 
     // Tao tuyet ban dau
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 30; i++) {
         setTimeout(createSnowflake, i * 50);
     }
 
     // ========== DIEU KHIEN HIEN THI SAO BANG VA TUYET ==========
-    function updateEffectsVisibility() {
+    const handleEffectsVisibility = debounce(function() {
         const homeRect = homeSection.getBoundingClientRect();
         const isHomeVisible = homeRect.bottom > 0 && homeRect.top < window.innerHeight;
         
@@ -732,31 +940,31 @@ document.addEventListener('DOMContentLoaded', function() {
             shootingStarsContainer.style.opacity = '0';
             snowContainer.style.opacity = '1';
         }
-    }
+    }, 10);
 
-    // Kiem tra khi scroll
-    window.addEventListener('scroll', updateEffectsVisibility);
-    updateEffectsVisibility(); // Chay lan dau
+    // Kiem tra khi scroll - with debounce
+    window.addEventListener('scroll', handleEffectsVisibility);
+    handleEffectsVisibility(); // Chay lan dau
 
-    // Tao sao bang tim
-    setInterval(createShootingStar, 200);
+    // Tao sao bang tim - REDUCED frequency: 200ms -> 400ms
+    setInterval(createShootingStar, 400);
 
-    // Dot lon khi load trang
-    for (let i = 0; i < 25; i++) {
+    // Dot lon khi load trang - REDUCED amount
+    for (let i = 0; i < 15; i++) {
         setTimeout(createShootingStar, i * 80);
     }
 
-    // Burst ngau nhien de luon co mua sao bang tim
+    // Burst ngau nhien - REDUCED frequency and amount: 2400ms -> 4000ms, 4-10 -> 3-7
     setInterval(() => {
-        const burst = 4 + Math.floor(Math.random() * 6);
+        const burst = 3 + Math.floor(Math.random() * 4);
         for (let i = 0; i < burst; i++) {
-            setTimeout(createShootingStar, i * 120);
+            setTimeout(createShootingStar, i * 150);
         }
-    }, 2400);
+    }, 4000);
 
     // ========== FEATURE CARD CLICK -> CHANGE HERO IMAGE ==========
     const featureCards = document.querySelectorAll('.feature-card');
-    const heroImage = document.getElementById('heroImage');
+    // heroImage already declared earlier for parallax effect
     
     featureCards.forEach(card => {
         card.addEventListener('click', function() {
@@ -908,12 +1116,16 @@ document.addEventListener('DOMContentLoaded', function() {
         setActiveNavById(currentId);
     }
 
-    window.addEventListener('scroll', function() {
+    // Debounced scroll handler
+    const handleScroll = debounce(() => {
         if (window.scrollY > 50) stickyHeader.classList.add('scrolled');
         else stickyHeader.classList.remove('scrolled');
 
         updateActiveNavOnScroll();
-    });
+        handleEffectsVisibility();
+    }, 10);
+
+    window.addEventListener('scroll', handleScroll);
 
     // Smooth scroll for ALL header anchors (logo, nav, button)
     document.querySelectorAll('.sticky-header a[href^="#"]').forEach(anchor => {
